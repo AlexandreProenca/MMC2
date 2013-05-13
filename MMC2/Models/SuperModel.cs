@@ -9,6 +9,6 @@ namespace MMC2.Models
     {
         public Endereco Endereco { get; set; }
         public Cliente Cliente { get; set; }
-       
+        public Telefone Telefone { get; set; }
     }
 }
