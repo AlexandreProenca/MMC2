@@ -1,0 +1,91 @@
+﻿@model MMC2.Models.Usuario
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Usuario</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Senha)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Senha)
+            @Html.ValidationMessageFor(model => model.Senha)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Setor_Id, "Setore")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Setor_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Setor_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataHora)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataHora)
+            @Html.ValidationMessageFor(model => model.DataHora)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ativo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ativo)
+            @Html.ValidationMessageFor(model => model.Ativo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoUsuario)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TipoUsuario)
+            @Html.ValidationMessageFor(model => model.TipoUsuario)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CustoHora)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CustoHora)
+            @Html.ValidationMessageFor(model => model.CustoHora)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

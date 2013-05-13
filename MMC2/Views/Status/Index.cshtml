@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MMC2.Models.Status>
+
+@{
+    ViewBag.Title = "Status";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
+}
+
+<h2>Status</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div id="gridContentClientes">
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead", 
+    footerStyle:"gridFooter",
+	rowStyle:"gridRow", 
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-dash" },
+    columns: new [] {
+    grid.Column("Nome",header:"Status"),
+    grid.Column("Tipo",header:"Tipo"),
+    grid.Column("",header:"Editar",format:@<text> @Html.ActionLink("Editar", "Edit", new { id=item.Id }) </text>, style:"gridBtn"),
+    grid.Column("",header:"Visualizar",format:@<text> @Html.ActionLink("Detalhar", "Details", new { id=item.Id }) </text>, style:"gridBtn"),
+    grid.Column("",header:"Deletar",format:@<text> @Html.ActionLink("Remover", "Delete", new { id=item.Id }) </text>, style:"gridBtn")
+})
+</div>

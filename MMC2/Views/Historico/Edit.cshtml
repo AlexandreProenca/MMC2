@@ -1,0 +1,69 @@
+﻿@model MMC2.Models.Historico
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Historico</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.QtdHoras)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.QtdHoras)
+            @Html.ValidationMessageFor(model => model.QtdHoras)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DataLancamento)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DataLancamento)
+            @Html.ValidationMessageFor(model => model.DataLancamento)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descrição)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descrição)
+            @Html.ValidationMessageFor(model => model.Descrição)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tarefa_Id, "Tarefa")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Tarefa_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Tarefa_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Usuario_Id, "Usuario")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Usuario_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Usuario_Id)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

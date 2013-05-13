@@ -1,0 +1,114 @@
+﻿@model MMC2.Models.Cliente
+
+@{
+    ViewBag.Title = "Edit";
+    //WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tabs").tabs();
+            $("#DataHora").datepicker();
+            $("#lnkVoltar").button({icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+        });
+    </script>
+}
+
+<h2>Edit</h2>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Cadastrar Cliente</a></li>
+        <li><a href="#tabs-2">Endereços</a></li>
+    </ul>
+    <div id="tabs-1">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Cliente</legend>
+
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Nome)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Nome)
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Endereco_Id, "Endereco")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Endereco_Id", String.Empty)
+                    @Html.ValidationMessageFor(model => model.Endereco_Id)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Email)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Site)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Site)
+                    @Html.ValidationMessageFor(model => model.Site)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Cnpj)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Cnpj)
+                    @Html.ValidationMessageFor(model => model.Cnpj)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DataHora)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DataHora)
+                    @Html.ValidationMessageFor(model => model.DataHora)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Ativo)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Ativo)
+                    @Html.ValidationMessageFor(model => model.Ativo)
+                </div>
+
+                <p>
+                    <input id="btnSalvar" type="submit" value="Save" />
+                </p>
+            </fieldset>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index", null, new {id = "lnkVoltar" })
+        </div>
+
+    </div>
+    <div id="tabs-2">
+
+
+        <h2>Endereço</h2>
+
+        Ver a possibilidade de colocar aqui a lista de endereços do cliente
+
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MMC2.Models.Projeto>
+
+@{
+    ViewBag.Title = "Projetos";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
+}
+
+<h2>Projetos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div id="gridContent">
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead", 
+    footerStyle:"gridFooter",
+	rowStyle:"gridRow", 
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-dash" },
+    columns: new [] {
+    grid.Column("Nome",header:"Nome"),
+    grid.Column("DataInicio",header:"Inicio",format:p=>p.DataInicio.ToShortDateString()),
+    grid.Column("DataFinal",header:"Fim",format:p=>p.DataFinal.ToShortDateString()),
+    grid.Column("Descricao",header:"Descrição"),
+    grid.Column("Status.Nome",header:"Status"),
+    grid.Column("Cliente.Nome",header:"Cliente"),
+    grid.Column("DataHora",header:"Data"),
+    grid.Column("Valor",header:"Valor"),
+    grid.Column("",header:"Editar",format:@<text> @Html.ActionLink("Editar", "Edit", new { id=item.Id }) </text>, style:"gridBtn"),
+    grid.Column("",header:"Visualizar",format:@<text> @Html.ActionLink("Detalhar", "Details", new { id=item.Id }) </text>, style:"gridBtn"),
+    grid.Column("",header:"Deletar",format:@<text> @Html.ActionLink("Remover", "Delete", new { id=item.Id }) </text>, style:"gridBtn")
+})
+</div>

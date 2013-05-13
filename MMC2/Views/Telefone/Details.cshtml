@@ -1,0 +1,50 @@
+﻿@model MMC2.Models.Telefone
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Telefone</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Numero)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Numero)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ddd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ddd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ramal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ramal)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Contato)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Contato)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Endereco.Rua)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Endereco.Rua)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

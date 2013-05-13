@@ -1,0 +1,36 @@
+﻿@model MMC2.Models.Skill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Skill</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nivel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nivel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Usuario.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Usuario.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SkillTipo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SkillTipo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

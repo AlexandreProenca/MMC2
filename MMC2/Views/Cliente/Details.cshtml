@@ -1,0 +1,64 @@
+﻿@model MMC2.Models.Cliente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Cliente</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Endereco.Rua)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Endereco.Rua)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Site)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Site)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Cnpj)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cnpj)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataHora)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataHora)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ativo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ativo)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

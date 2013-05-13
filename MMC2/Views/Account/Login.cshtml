@@ -1,0 +1,45 @@
+﻿@model MMC2.Models.Usuario
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+<h2>Login de acesso ao sistema.</h2>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Login</legend>
+        <ol>
+                <li>
+                    @Html.LabelFor(model => model.Email)
+                    @Html.TextBoxFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.Senha)
+                    @Html.PasswordFor(model => model.Senha)
+                    @Html.ValidationMessageFor(model => model.Senha)
+                </li>
+            @*<li>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>*@
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Esqueci minha senha.", "Lembrar")
+    </p>
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

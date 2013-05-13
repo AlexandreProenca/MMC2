@@ -1,0 +1,50 @@
+﻿@model MMC2.Models.Historico
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Historico</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.QtdHoras)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QtdHoras)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataLancamento)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataLancamento)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descrição)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descrição)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tarefa.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tarefa.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Usuario.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Usuario.Nome)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

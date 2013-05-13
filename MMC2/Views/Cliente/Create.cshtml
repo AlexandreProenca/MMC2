@@ -1,0 +1,115 @@
+﻿@model MMC2.Models.SuperModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tabs").tabs();
+        });
+    </script>
+}
+
+<h2>Create</h2>
+
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Cadastrar Cliente</a></li>
+  </ul>
+  <div id="tabs-1">
+      @using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    
+    <div style=" border:1px; float:left;  margin:10px">
+       
+            @Html.LabelFor(model => model.Cliente.Nome)
+      
+            @Html.EditorFor(model => model.Cliente.Nome)
+            @Html.ValidationMessageFor(model => model.Cliente.Nome)
+        
+
+       
+       
+            @Html.LabelFor(model => model.Cliente.Email)
+       
+            @Html.EditorFor(model => model.Cliente.Email)
+            @Html.ValidationMessageFor(model => model.Cliente.Email)
+       
+            @Html.LabelFor(model => model.Cliente.Site)
+       
+            @Html.EditorFor(model => model.Cliente.Site)
+            @Html.ValidationMessageFor(model => model.Cliente.Site)
+       
+            @Html.LabelFor(model => model.Cliente.Cnpj)
+      
+            @Html.EditorFor(model => model.Cliente.Cnpj)
+            @Html.ValidationMessageFor(model => model.Cliente.Cnpj)
+       
+            @Html.LabelFor(model => model.Cliente.DataHora)
+      
+            @Html.EditorFor(model => model.Cliente.DataHora)
+            @Html.ValidationMessageFor(model => model.Cliente.DataHora)
+       
+            @Html.LabelFor(model => model.Cliente.Ativo)
+      
+            @Html.EditorFor(model => model.Cliente.Ativo)
+            @Html.ValidationMessageFor(model => model.Cliente.Ativo)
+       </div>
+
+    <div style="border:1px; float:left; margin:10px" >
+     <fieldset>
+         <legend>Endereço</legend>
+            @Html.LabelFor(model => model.Endereco.Rua)
+       
+            @Html.EditorFor(model => model.Endereco.Rua)
+            @Html.ValidationMessageFor(model => model.Endereco.Rua)
+     
+            @Html.LabelFor(model => model.Endereco.Numero)
+      
+            @Html.EditorFor(model => model.Endereco.Numero)
+            @Html.ValidationMessageFor(model => model.Endereco.Numero)
+      
+            @Html.LabelFor(model => model.Endereco.Bairro)
+        
+            @Html.EditorFor(model => model.Endereco.Bairro)
+            @Html.ValidationMessageFor(model => model.Endereco.Bairro)
+        
+            @Html.LabelFor(model => model.Endereco.CEP)
+        
+            @Html.EditorFor(model => model.Endereco.CEP)
+            @Html.ValidationMessageFor(model => model.Endereco.CEP)
+     
+            @Html.LabelFor(model => model.Endereco.Cidade)
+       
+            @Html.EditorFor(model => model.Endereco.Cidade)
+            @Html.ValidationMessageFor(model => model.Endereco.Cidade)
+        
+            @Html.LabelFor(model => model.Endereco.Complemento)
+      
+            @Html.EditorFor(model => model.Endereco.Complemento)
+            @Html.ValidationMessageFor(model => model.Endereco.Complemento)
+      
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+   </fieldset>
+  
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+      <div style="clear:both;"></div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,85 @@
+﻿@model MMC2.Models.Tarefa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Tarefa</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descricao)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descricao)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataInicio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataInicio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DataFinal)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DataFinal)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Porcentagem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Porcentagem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Projeto.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Projeto.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Prioridade)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Prioridade)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Usuario.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Usuario.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TempoEstimado)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TempoEstimado)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

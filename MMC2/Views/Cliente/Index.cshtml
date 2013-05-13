@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MMC2.Models.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
+
+}
+
+<h2>Clientes</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo", "Create")
+</p>
+
+<div id="gridContentClientes">
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead", 
+    footerStyle:"gridFooter",
+	rowStyle:"gridRow", 
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-dash" },
+    columns: new [] {
+    grid.Column(header: "Check", style: "labelcolumn",
+    format: @<text><input class="check-box" id="assignChkBx" name="assignChkBx" type="checkbox" value="@item.Id" /></text>),
+    grid.Column("Id",header:"Codigo"),
+    grid.Column("Nome",header:"Cliente"),
+    grid.Column("Endereco.Rua",header:"Endereço"),
+    grid.Column("Email",header:"E-Mail"),
+    grid.Column("Site",header:"Site"),
+    grid.Column("Cnpj",header:"CNPJ"),
+    grid.Column("DataHora",header:"Inclusão",format:p=>p.DataHora.ToShortDateString()),
+    grid.Column("",header:"Editar",format:@<text> @Html.ActionLink("Editar", "Edit", new { id=item.Id }) </text>, style:"gridBtn"),
+    grid.Column("",header:"Visualizar",format:@<text> @Html.ActionLink("Detalhar", "Details", new { id=item.Id }) </text>, style:"gridBtn"),
+    grid.Column("",header:"Deletar",format:@<text> @Html.ActionLink("Remover", "Delete", new { id=item.Id }) </text>, style:"gridBtn")
+  
+
+})
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
