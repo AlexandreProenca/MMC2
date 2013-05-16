@@ -423,6 +423,20 @@ label {
 label.checkbox {
     display: inline;
 }
+.display-label
+{
+    float:left;
+    padding:10px;
+    font-size:12pt;
+    font-weight:normal;
+}
+.display-field
+{
+    float:left;
+    padding:10px;
+    font-size:12pt;
+    font-weight:bold;
+}
 
 input, textarea {
     border: 1px solid #e2e2e2;
@@ -819,5 +833,5 @@ tr.pager td {
 
 .gridBtn
 {
-    width:50px;
+    width:20px;
 }

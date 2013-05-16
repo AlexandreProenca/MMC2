@@ -18,8 +18,8 @@ namespace MMC2.Controllers
 
         public ActionResult Index()
         {
-            var clientes = db.Clientes.Include(c => c.Endereco);
-            return View(clientes.ToList());
+            var clientes = (from a in db.Clientes where a.Ativo == true select a).ToList();
+            return View(clientes);
         }
 
         //
@@ -52,12 +52,13 @@ namespace MMC2.Controllers
         {
             if (ModelState.IsValid)
             {
+                cliente.DataHora = DateTime.Now;
                 db.Clientes.Add(cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
+            //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
             return View(cliente);
         }
 
@@ -66,14 +67,19 @@ namespace MMC2.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            SuperModel sm = new SuperModel();
             Cliente cliente = (from a in db.Clientes where a.Id == id select a).FirstOrDefault();
+            sm.Cliente = cliente;
+            //sm.lstEndereco.AddRange(from a in db.Enderecos select a);
+            sm.Endereco = cliente.Enderecos;
+            //sm.lstEndereco.AddRange(sm.Endereco);
                 //db.Clientes.Find(id);
-            if (cliente == null)
+            if (sm == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
-            return View(cliente);
+            //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", sm.Cliente.Endereco_Id);
+            return View(sm);
         }
 
         //
@@ -88,7 +94,7 @@ namespace MMC2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
+            //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
             return View(cliente);
         }
 

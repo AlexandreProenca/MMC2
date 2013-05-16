@@ -25,6 +25,7 @@
 
                         <li>@Html.ActionLink("About", "About", "Home")</li>
 
+                            <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
                         @if (Session["-USUARIO"] != null)
                         {
                             if (Session["-PAPEL"].ToString() == "Funcionário")
@@ -34,7 +35,6 @@
                             }
                             else if (Session["-PAPEL"].ToString() == "Gerente")
                             {
-                            <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
                             <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
                             <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
                             <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>

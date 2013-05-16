@@ -16,19 +16,19 @@ namespace MMC2.Models
     {
         public Cliente()
         {
+            this.Enderecos = new HashSet<Endereco>();
             this.Projetos = new HashSet<Projeto>();
         }
     
         public int Id { get; set; }
         public string Nome { get; set; }
-        public Nullable<int> Endereco_Id { get; set; }
         public string Email { get; set; }
         public string Site { get; set; }
         public string Cnpj { get; set; }
         public System.DateTime DataHora { get; set; }
         public bool Ativo { get; set; }
     
-        public virtual Endereco Endereco { get; set; }
+        public virtual ICollection<Endereco> Enderecos { get; set; }
         public virtual ICollection<Projeto> Projetos { get; set; }
     }
 }

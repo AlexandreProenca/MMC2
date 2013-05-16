@@ -15,11 +15,10 @@
           <EntitySet Name="Status" EntityType="MHCAModel.Store.Status" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="MHCAModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tarefas" EntityType="MHCAModel.Store.Tarefas" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Telefones" EntityType="MHCAModel.Store.Telefones" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Usuarios" EntityType="MHCAModel.Store.Usuarios" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_cliente_endereco" Association="MHCAModel.Store.FK_cliente_endereco">
-            <End Role="Enderecos" EntitySet="Enderecos" />
+          <AssociationSet Name="FK_Enderecos_Clientes" Association="MHCAModel.Store.FK_Enderecos_Clientes">
             <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Enderecos" EntitySet="Enderecos" />
           </AssociationSet>
           <AssociationSet Name="FK_historico_tarefa" Association="MHCAModel.Store.FK_historico_tarefa">
             <End Role="Tarefas" EntitySet="Tarefas" />
@@ -53,10 +52,6 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Tarefas" EntitySet="Tarefas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Telefones_Enderecos" Association="MHCAModel.Store.FK_Telefones_Enderecos">
-            <End Role="Enderecos" EntitySet="Enderecos" />
-            <End Role="Telefones" EntitySet="Telefones" />
-          </AssociationSet>
           <AssociationSet Name="FK_usuario_setor" Association="MHCAModel.Store.FK_usuario_setor">
             <End Role="Setores" EntitySet="Setores" />
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -68,7 +63,6 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Endereco_Id" Type="int" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Site" Type="varchar" MaxLength="50" />
           <Property Name="Cnpj" Type="varchar" MaxLength="50" />
@@ -87,6 +81,9 @@
           <Property Name="Cidade" Type="varchar" MaxLength="50" />
           <Property Name="Estado" Type="varchar" MaxLength="50" />
           <Property Name="Complemento" Type="varchar" MaxLength="50" />
+          <Property Name="Telefone1" Type="varchar" MaxLength="14" />
+          <Property Name="Telefone2" Type="varchar" MaxLength="14" />
+          <Property Name="Cliente_id" Type="int" />
         </EntityType>
         <EntityType Name="Historicos">
           <Key>
@@ -163,17 +160,6 @@
           <Property Name="Usuario_Id" Type="int" Nullable="false" />
           <Property Name="TempoEstimado" Type="float" />
         </EntityType>
-        <EntityType Name="Telefones">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Numero" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Ddd" Type="int" Nullable="false" />
-          <Property Name="Ramal" Type="int" />
-          <Property Name="Contato" Type="varchar" MaxLength="50" />
-          <Property Name="Endereco_Id" Type="int" />
-        </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="Id" />
@@ -188,15 +174,15 @@
           <Property Name="TipoUsuario" Type="varchar" MaxLength="50" />
           <Property Name="CustoHora" Type="money" />
         </EntityType>
-        <Association Name="FK_cliente_endereco">
-          <End Role="Enderecos" Type="MHCAModel.Store.Enderecos" Multiplicity="0..1" />
-          <End Role="Clientes" Type="MHCAModel.Store.Clientes" Multiplicity="*" />
+        <Association Name="FK_Enderecos_Clientes">
+          <End Role="Clientes" Type="MHCAModel.Store.Clientes" Multiplicity="0..1" />
+          <End Role="Enderecos" Type="MHCAModel.Store.Enderecos" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Enderecos">
+            <Principal Role="Clientes">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="Endereco_Id" />
+            <Dependent Role="Enderecos">
+              <PropertyRef Name="Cliente_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -296,18 +282,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Telefones_Enderecos">
-          <End Role="Enderecos" Type="MHCAModel.Store.Enderecos" Multiplicity="0..1" />
-          <End Role="Telefones" Type="MHCAModel.Store.Telefones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Enderecos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Telefones">
-              <PropertyRef Name="Endereco_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_usuario_setor">
           <End Role="Setores" Type="MHCAModel.Store.Setores" Multiplicity="0..1" />
           <End Role="Usuarios" Type="MHCAModel.Store.Usuarios" Multiplicity="*" />
@@ -335,19 +309,14 @@
           <EntitySet Name="Status" EntityType="MHCAModel.Status" />
           <EntitySet Name="sysdiagrams" EntityType="MHCAModel.sysdiagram" />
           <EntitySet Name="Tarefas" EntityType="MHCAModel.Tarefa" />
-          <EntitySet Name="Telefones" EntityType="MHCAModel.Telefone" />
           <EntitySet Name="Usuarios" EntityType="MHCAModel.Usuario" />
-          <AssociationSet Name="FK_cliente_endereco" Association="MHCAModel.FK_cliente_endereco">
-            <End Role="Enderecos" EntitySet="Enderecos" />
+          <AssociationSet Name="FK_Enderecos_Clientes" Association="MHCAModel.FK_Enderecos_Clientes">
             <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Enderecos" EntitySet="Enderecos" />
           </AssociationSet>
           <AssociationSet Name="FK_projeto_cliente" Association="MHCAModel.FK_projeto_cliente">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Projetos" EntitySet="Projetos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Telefones_Enderecos" Association="MHCAModel.FK_Telefones_Enderecos">
-            <End Role="Enderecos" EntitySet="Enderecos" />
-            <End Role="Telefones" EntitySet="Telefones" />
           </AssociationSet>
           <AssociationSet Name="FK_historico_tarefa" Association="MHCAModel.FK_historico_tarefa">
             <End Role="Tarefas" EntitySet="Tarefas" />
@@ -388,13 +357,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Endereco_Id" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Site" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Cnpj" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Ativo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Endereco" Relationship="MHCAModel.FK_cliente_endereco" FromRole="Clientes" ToRole="Enderecos" />
+          <NavigationProperty Name="Enderecos" Relationship="MHCAModel.FK_Enderecos_Clientes" FromRole="Clientes" ToRole="Enderecos" />
           <NavigationProperty Name="Projetos" Relationship="MHCAModel.FK_projeto_cliente" FromRole="Clientes" ToRole="Projetos" />
         </EntityType>
         <EntityType Name="Endereco">
@@ -409,8 +377,10 @@
           <Property Name="Cidade" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Estado" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Complemento" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Clientes" Relationship="MHCAModel.FK_cliente_endereco" FromRole="Enderecos" ToRole="Clientes" />
-          <NavigationProperty Name="Telefones" Relationship="MHCAModel.FK_Telefones_Enderecos" FromRole="Enderecos" ToRole="Telefones" />
+          <Property Name="Telefone1" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="Telefone2" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="Cliente_id" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="MHCAModel.FK_Enderecos_Clientes" FromRole="Enderecos" ToRole="Clientes" />
         </EntityType>
         <EntityType Name="Historico">
           <Key>
@@ -500,18 +470,6 @@
           <NavigationProperty Name="Status" Relationship="MHCAModel.FK_tarefa_status" FromRole="Tarefas" ToRole="Status" />
           <NavigationProperty Name="Usuario" Relationship="MHCAModel.FK_Tarefas_Usuarios" FromRole="Tarefas" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="Telefone">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Ddd" Type="Int32" Nullable="false" />
-          <Property Name="Ramal" Type="Int32" />
-          <Property Name="Contato" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Endereco_Id" Type="Int32" />
-          <NavigationProperty Name="Endereco" Relationship="MHCAModel.FK_Telefones_Enderecos" FromRole="Telefones" ToRole="Enderecos" />
-        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="Id" />
@@ -530,15 +488,15 @@
           <NavigationProperty Name="Skills" Relationship="MHCAModel.FK_skill_usuario" FromRole="Usuarios" ToRole="Skills" />
           <NavigationProperty Name="Tarefas" Relationship="MHCAModel.FK_Tarefas_Usuarios" FromRole="Usuarios" ToRole="Tarefas" />
         </EntityType>
-        <Association Name="FK_cliente_endereco">
-          <End Role="Enderecos" Type="MHCAModel.Endereco" Multiplicity="0..1" />
-          <End Role="Clientes" Type="MHCAModel.Cliente" Multiplicity="*" />
+        <Association Name="FK_Enderecos_Clientes">
+          <End Role="Clientes" Type="MHCAModel.Cliente" Multiplicity="0..1" />
+          <End Role="Enderecos" Type="MHCAModel.Endereco" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Enderecos">
+            <Principal Role="Clientes">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="Endereco_Id" />
+            <Dependent Role="Enderecos">
+              <PropertyRef Name="Cliente_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -551,18 +509,6 @@
             </Principal>
             <Dependent Role="Projetos">
               <PropertyRef Name="Cliente_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Telefones_Enderecos">
-          <End Role="Enderecos" Type="MHCAModel.Endereco" Multiplicity="0..1" />
-          <End Role="Telefones" Type="MHCAModel.Telefone" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Enderecos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Telefones">
-              <PropertyRef Name="Endereco_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -673,7 +619,6 @@
               <MappingFragment StoreEntitySet="Clientes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Site" ColumnName="Site" />
                 <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
@@ -693,6 +638,9 @@
                 <ScalarProperty Name="Cidade" ColumnName="Cidade" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Telefone1" ColumnName="Telefone1" />
+                <ScalarProperty Name="Telefone2" ColumnName="Telefone2" />
+                <ScalarProperty Name="Cliente_id" ColumnName="Cliente_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -775,18 +723,6 @@
                 <ScalarProperty Name="Prioridade" ColumnName="Prioridade" />
                 <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
                 <ScalarProperty Name="TempoEstimado" ColumnName="TempoEstimado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Telefones">
-            <EntityTypeMapping TypeName="MHCAModel.Telefone">
-              <MappingFragment StoreEntitySet="Telefones">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="Ddd" ColumnName="Ddd" />
-                <ScalarProperty Name="Ramal" ColumnName="Ramal" />
-                <ScalarProperty Name="Contato" ColumnName="Contato" />
-                <ScalarProperty Name="Endereco_Id" ColumnName="Endereco_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

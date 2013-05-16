@@ -34,7 +34,6 @@ namespace MMC2.Models
         public DbSet<Status> Status { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
-        public DbSet<Telefone> Telefones { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
     }
 }

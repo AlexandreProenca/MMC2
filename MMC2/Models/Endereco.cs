@@ -14,12 +14,6 @@ namespace MMC2.Models
     
     public partial class Endereco
     {
-        public Endereco()
-        {
-            this.Clientes = new HashSet<Cliente>();
-            this.Telefones = new HashSet<Telefone>();
-        }
-    
         public int Id { get; set; }
         public string Rua { get; set; }
         public int Numero { get; set; }
@@ -28,8 +22,10 @@ namespace MMC2.Models
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string Complemento { get; set; }
+        public string Telefone1 { get; set; }
+        public string Telefone2 { get; set; }
+        public Nullable<int> Cliente_id { get; set; }
     
-        public virtual ICollection<Cliente> Clientes { get; set; }
-        public virtual ICollection<Telefone> Telefones { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

@@ -7,8 +7,7 @@ namespace MMC2.Models
 {
     public class SuperModel
     {
-        public Endereco Endereco { get; set; }
         public Cliente Cliente { get; set; }
-        public Telefone Telefone { get; set; }
+        public IEnumerable<MMC2.Models.Endereco> Endereco { get; set; }
     }
 }

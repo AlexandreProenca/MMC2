@@ -4,21 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ae5d0242b3b6470da0a4bc4d5f0fba3e" Name="Diagram1">
-        <EntityTypeShape EntityType="MHCAModel.Cliente" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MHCAModel.Endereco" Width="1.5" PointX="1.5" PointY="11.25" IsExpanded="true" />
+      <Diagram DiagramId="7a3299dfd8a84bba885e023abb073ce1" Name="Diagram1">
+        <EntityTypeShape EntityType="MHCAModel.Cliente" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MHCAModel.Endereco" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Historico" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Projeto" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Setore" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Skill" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MHCAModel.Status" Width="1.5" PointX="3.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MHCAModel.Status" Width="1.5" PointX="3.75" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.sysdiagram" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Tarefa" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MHCAModel.Telefone" Width="1.5" PointX="3.75" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Usuario" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <AssociationConnector Association="MHCAModel.FK_cliente_endereco" ManuallyRouted="false" />
+        <AssociationConnector Association="MHCAModel.FK_Enderecos_Clientes" ManuallyRouted="false" />
         <AssociationConnector Association="MHCAModel.FK_projeto_cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="MHCAModel.FK_Telefones_Enderecos" ManuallyRouted="false" />
         <AssociationConnector Association="MHCAModel.FK_historico_tarefa" ManuallyRouted="false" />
         <AssociationConnector Association="MHCAModel.FK_Historicos_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="MHCAModel.FK_projeto_status" ManuallyRouted="false" />
