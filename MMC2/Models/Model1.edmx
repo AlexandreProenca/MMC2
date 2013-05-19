@@ -132,7 +132,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Tipo" Type="varchar" MaxLength="10" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -436,7 +436,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Tipo" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Projetos" Relationship="MHCAModel.FK_projeto_status" FromRole="Status" ToRole="Projetos" />
           <NavigationProperty Name="Tarefas" Relationship="MHCAModel.FK_tarefa_status" FromRole="Status" ToRole="Tarefas" />
         </EntityType>
@@ -694,7 +694,7 @@
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

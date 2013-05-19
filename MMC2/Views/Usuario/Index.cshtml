@@ -5,10 +5,22 @@
     WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
 }
 
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+        });
+    </script>
+}
+
 <h2>Usuários</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Novo", "Create", null, new { id = "lnkNovo" })
 </p>
 
 
@@ -22,14 +34,9 @@
     htmlAttributes: new { id = "grid-dash" },
     columns: new [] {
     grid.Column("Nome",header:"Nome"),
-    grid.Column("TipoUsuario",header:"Papel"),
     grid.Column("Email",header:"Email"),
-    grid.Column("Senha",header:"Senha"),
-    grid.Column("CustoHora",header:"Hora Homem"),
-    grid.Column("Ativo",header:"Ativo"),
-    grid.Column("DataHora",header:"Data",format:p=>p.DataHora.ToShortDateString()),
-    grid.Column("",header:"Editar",format:@<text> @Html.ActionLink("Editar", "Edit", new { id=item.Id }) </text>, style:"gridBtn"),
-    grid.Column("",header:"Visualizar",format:@<text> @Html.ActionLink("Detalhar", "Details", new { id=item.Id }) </text>, style:"gridBtn"),
-    grid.Column("",header:"Deletar",format:@<text> @Html.ActionLink("Remover", "Delete", new { id=item.Id }) </text>, style:"gridBtn")
+    grid.Column("TipoUsuario",header:"Papel"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn")
 })
 </div>

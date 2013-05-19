@@ -18,7 +18,7 @@ namespace MMC2.Controllers
 
         public ActionResult Index()
         {
-            var clientes = (from a in db.Clientes where a.Ativo == true select a).ToList();
+            var clientes = (from a in db.Clientes where a.Ativo == true orderby a.Nome select a).ToList();
             return View(clientes);
         }
 
@@ -40,7 +40,12 @@ namespace MMC2.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua");
+            //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua");
+            return View();
+        }
+
+        public ActionResult CreateEndereco()
+        {
             return View();
         }
 
@@ -62,6 +67,21 @@ namespace MMC2.Controllers
             return View(cliente);
         }
 
+        [HttpPost]
+        public ActionResult CreateEndereco(Endereco endereco, int idCliente)
+        {
+            if (ModelState.IsValid)
+            {
+                endereco.Cliente_id = idCliente;
+                db.Enderecos.Add(endereco);
+                db.SaveChanges();
+                return RedirectToAction("Edit/" + endereco.Cliente_id.Value.ToString());
+            }
+
+            //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
+            return View(endereco);
+        }
+
         //
         // GET: /Cliente/Edit/5
 
@@ -71,7 +91,7 @@ namespace MMC2.Controllers
             Cliente cliente = (from a in db.Clientes where a.Id == id select a).FirstOrDefault();
             sm.Cliente = cliente;
             //sm.lstEndereco.AddRange(from a in db.Enderecos select a);
-            sm.Endereco = cliente.Enderecos;
+            sm.Endereco = cliente.Enderecos.OrderBy(a => a.Rua);
             //sm.lstEndereco.AddRange(sm.Endereco);
                 //db.Clientes.Find(id);
             if (sm == null)
@@ -80,6 +100,17 @@ namespace MMC2.Controllers
             }
             //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", sm.Cliente.Endereco_Id);
             return View(sm);
+        }
+
+        public ActionResult EditEndereco(int id = 0)
+        {
+            Endereco endereco = (from a in db.Enderecos where a.Id == id select a).FirstOrDefault();
+            if (endereco == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", sm.Cliente.Endereco_Id);
+            return View(endereco);
         }
 
         //
@@ -96,6 +127,19 @@ namespace MMC2.Controllers
             }
             //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
             return View(cliente);
+        }
+
+        [HttpPost]
+        public ActionResult EditEndereco(Endereco endereco)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(endereco).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Edit/"+endereco.Cliente_id.Value.ToString());
+            }
+            //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
+            return View(endereco);
         }
 
         //
@@ -121,6 +165,30 @@ namespace MMC2.Controllers
             db.Clientes.Remove(cliente);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult DeleteEndereco(int id = 0)
+        {
+            Endereco endereco = db.Enderecos.Find(id);
+            if (endereco == null)
+            {
+                return HttpNotFound();
+            }
+            return View(endereco);
+        }
+
+        //
+        // POST: /Cliente/Delete/5
+
+        [HttpPost, ActionName("DeleteEndereco")]
+        public ActionResult DeleteEnderecoConfirmed(int id)
+        {
+            Endereco endereco = db.Enderecos.Find(id);
+            int idCliente = endereco.Cliente_id.Value;
+            db.Enderecos.Remove(endereco);
+            db.SaveChanges();
+            return RedirectToAction("Edit/" + idCliente.ToString());
         }
 
         protected override void Dispose(bool disposing)

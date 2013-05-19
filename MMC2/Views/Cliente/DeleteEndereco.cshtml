@@ -1,0 +1,127 @@
+﻿@model MMC2.Models.Endereco
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnDelete").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            });
+        });
+    </script>
+}
+<h2>Excluir?</h2>
+
+<h3>Tem certeza que deseja excluir?</h3>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Endereco</legend>
+
+        <table style="padding: 10px;">
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Rua):
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Rua)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Numero):
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Numero)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Bairro):
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Bairro)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.CEP):
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.CEP)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Cidade):
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Cidade)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Estado):
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Estado)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Complemento):
+                    </div>
+                </td>
+                <td>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Complemento)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink("Voltar para a lista", "Edit/" + Model.Cliente_id.Value.ToString() + "", null, new { id = "lnkVoltar" })
+                </td>
+                <td>
+                    <input type="submit" id="btnDelete" value="Excluir" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}

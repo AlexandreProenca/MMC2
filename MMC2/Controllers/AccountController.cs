@@ -39,7 +39,9 @@ namespace MMC2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Usuario usuario, string returnUrl)
         {
-            var obj = (from a in db.Usuarios where a.Email.ToLower().Equals(usuario.Email) && a.Senha.Equals(usuario.Senha) select a).FirstOrDefault();
+            var obj = (from a in db.Usuarios 
+                       where a.Email.ToLower().Equals(usuario.Email) && a.Senha.Equals(usuario.Senha) && a.Ativo == true 
+                       select a).FirstOrDefault();
             if (ModelState.IsValid && obj != null)
             {
                 Session["-USUARIO"] = obj.Id;

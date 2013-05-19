@@ -5,10 +5,22 @@
     WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
 }
 
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+        });
+    </script>
+}
+
 <h2>Skills</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Novo", "Create", null, new { id = "lnkNovo" })
 </p>
 <div id="gridContentClientes">
 @grid.GetHtml(
@@ -19,11 +31,11 @@
     alternatingRowStyle: "gridAltRow",
     htmlAttributes: new { id = "grid-dash" },
     columns: new [] {
-    grid.Column("Nivel",header:"Nível"),
-    grid.Column("SkillTipo",header:"Tipo de Skill"),
     grid.Column("Usuario.Nome",header:"Usuário"),
-    grid.Column("",header:"Editar",format:@<text> @Html.ActionLink("Editar", "Edit", new { id=item.Id }) </text>, style:"gridBtn"),
-    grid.Column("",header:"Visualizar",format:@<text> @Html.ActionLink("Detalhar", "Details", new { id=item.Id }) </text>, style:"gridBtn"),
-    grid.Column("",header:"Deletar",format:@<text> @Html.ActionLink("Remover", "Delete", new { id=item.Id }) </text>, style:"gridBtn")
+    grid.Column("SkillTipo",header:"Tipo de Skill"),
+    grid.Column("Nivel",header:"Nível"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Delete", new { id=item.Id })"><img src="~/Images/bt_excluir.png" title="Excluir" /></a> </text>, style:"gridBtn")
 })
 </div>

@@ -19,7 +19,7 @@ namespace MMC2.Controllers
         public ActionResult Index()
         {
             var usuarios = db.Usuarios.Include(u => u.Setore);
-            return View(usuarios.ToList());
+            return View(usuarios.ToList().Where(a => a.Ativo == true).OrderBy(a => a.Nome));
         }
 
         //
@@ -52,6 +52,7 @@ namespace MMC2.Controllers
         {
             if (ModelState.IsValid)
             {
+                usuario.DataHora = DateTime.Now;
                 db.Usuarios.Add(usuario);
                 db.SaveChanges();
                 return RedirectToAction("Index");

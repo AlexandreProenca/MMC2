@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a3299dfd8a84bba885e023abb073ce1" Name="Diagram1">
+      <Diagram DiagramId="13a27d5f3526474198d603d4c5ea0476" Name="Diagram1">
         <EntityTypeShape EntityType="MHCAModel.Cliente" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Endereco" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MHCAModel.Historico" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />

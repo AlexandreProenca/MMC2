@@ -22,10 +22,15 @@
                 <nav>
                     <ul id="menu">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
                         <li>@Html.ActionLink("About", "About", "Home")</li>
-
-                            <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
+                        <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
+                        <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
+                        <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
+                        <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
+                        <li>@Html.ActionLink("Skills", "Index", "Skill")</li>
+                        <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                        <li>@Html.ActionLink("Status", "Index", "Status")</li>
+                        <li>@Html.ActionLink("Setores", "Index", "Setor")</li>
                         @if (Session["-USUARIO"] != null)
                         {
                             if (Session["-PAPEL"].ToString() == "Funcionário")
@@ -42,16 +47,7 @@
                             }
                             else if (Session["-PAPEL"].ToString() == "Administrador")
                             {
-                            <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
-                            <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
-                            <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
-                            <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
-                            <li>@Html.ActionLink("Skills", "Index", "Skill")</li>
-                            <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
-                            <li>@Html.ActionLink("Status", "Index", "Status")</li>
-                            <li>@Html.ActionLink("Endereços", "Index", "Endereco")</li>
-                            <li>@Html.ActionLink("Telefones", "Index", "Telefone")</li>
-                            <li>@Html.ActionLink("Setores", "Index", "Setor")</li>
+
                             }
                         }
                     </ul>

@@ -22,7 +22,7 @@ namespace MMC2.Models
     
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Tipo { get; set; }
+        public bool Ativo { get; set; }
     
         public virtual ICollection<Projeto> Projetos { get; set; }
         public virtual ICollection<Tarefa> Tarefas { get; set; }

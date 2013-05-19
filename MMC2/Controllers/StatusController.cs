@@ -18,7 +18,7 @@ namespace MMC2.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Status.ToList());
+            return View(db.Status.ToList().Where(a => a.Ativo == true));
         }
 
         //
