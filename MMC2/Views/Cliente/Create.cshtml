@@ -14,6 +14,9 @@
             $("#tabs").tabs();
             $("#Cliente_DataHora").datepicker();
             $("#Cliente_Cnpj").mask("99.999.999/9999-99");
+            $("#EnderecoNovo_Telefone1").mask("(99) 9999-9999");
+            $("#EnderecoNovo_Telefone2").mask("(99) 9999-9999");
+            $("#EnderecoNovo_CEP").mask("99.999-999");
             $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
             $("#btnSalvar").button({
                 icons: {
@@ -28,95 +31,220 @@
 <h2>Novo</h2>
 
 <div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">Cadastrar Cliente</a></li>
-  </ul>
-  <div id="tabs-1">
-      @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    <ul>
+        <li><a href="#tabs-1">Cadastrar Cliente</a></li>
+    </ul>
+    <div id="tabs-1">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
 
     
-    <div style=" border:1px; float:left;  margin:10px">
-       
-            <fieldset>
-                <legend>Cliente</legend>
-                
-                <table>
-                    <tr>
-                        <td>
-                            <table style="padding: 10px;">
-                                <tr>
-                                    <td>
-                                        <div class="editor-label">
-                                            @Html.LabelFor(model => model.Cliente.Nome)
-                                        </div>
-                                        <div class="editor-field">
-                                            @Html.EditorFor(model => model.Cliente.Nome)
-                                            @Html.ValidationMessageFor(model => model.Cliente.Nome)
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="editor-label">
-                                            @Html.LabelFor(model => model.Cliente.Email)
-                                        </div>
-                                        <div class="editor-field">
-                                            @Html.EditorFor(model => model.Cliente.Email)
-                                            @Html.ValidationMessageFor(model => model.Cliente.Email)
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table style="padding: 10px;">
+            <div style="border: 1px; float: left; margin: 10px">
 
-                                <tr>
-                                    <td>
-                                        <div class="editor-label">
-                                            @Html.LabelFor(model => model.Cliente.Site)
-                                        </div>
-                                        <div class="editor-field">
-                                            @Html.EditorFor(model => model.Cliente.Site)
-                                            @Html.ValidationMessageFor(model => model.Cliente.Site)
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="editor-label">
-                                            @Html.LabelFor(model => model.Cliente.Cnpj)
-                                        </div>
-                                        <div class="editor-field">
-                                            @Html.EditorFor(model => model.Cliente.Cnpj)
-                                            @Html.ValidationMessageFor(model => model.Cliente.Cnpj)
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table style="padding: 10px;">
-                                <tr>
-                                    <td>
-                                        <div class="editor-label">
-                                            @Html.LabelFor(model => model.Cliente.Ativo)
-                                        </div>
-                                        <div class="editor-field">
-                                            @Html.EditorFor(model => model.Cliente.Ativo)
-                                            @Html.ValidationMessageFor(model => model.Cliente.Ativo)
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <p>
-                    <input id="btnSalvar" type="submit" value="Salvar" />
-                </p>
-            </fieldset>
-       </div>
+                <fieldset>
+                    <legend>Cliente</legend>
 
-}
-      
-        <div style="clear:both;">
+                    <table>
+                        <tr>
+                            <td>
+                                <table style="padding: 10px;">
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Cliente.Nome)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Cliente.Nome)
+                                                @Html.ValidationMessageFor(model => model.Cliente.Nome)
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Cliente.Email)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Cliente.Email)
+                                                @Html.ValidationMessageFor(model => model.Cliente.Email)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="padding: 10px;">
+
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Cliente.Site)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Cliente.Site)
+                                                @Html.ValidationMessageFor(model => model.Cliente.Site)
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Cliente.Cnpj)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.Cliente.Cnpj)
+                                                @Html.ValidationMessageFor(model => model.Cliente.Cnpj)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="padding: 10px;">
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.Cliente.Ativo)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.CheckBoxFor(model => model.Cliente.Ativo)
+                                                @Html.ValidationMessageFor(model => model.Cliente.Ativo)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>
+                                <table style="padding: 10px;">
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Rua)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Rua)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Rua)
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Numero)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Numero)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Numero)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="padding: 10px;">
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Bairro)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Bairro)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Bairro)
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.CEP)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.CEP)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.CEP)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="padding: 10px;">
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Cidade)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Cidade)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Cidade)
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Estado)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Estado)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Estado)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="padding: 10px;">
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Complemento)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Complemento)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Complemento)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="padding: 10px;">
+                                    <tr>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Telefone1)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Telefone1)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Telefone1)
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="editor-label">
+                                                @Html.LabelFor(model => model.EnderecoNovo.Telefone2)
+                                            </div>
+                                            <div class="editor-field">
+                                                @Html.EditorFor(model => model.EnderecoNovo.Telefone2)
+                                                @Html.ValidationMessageFor(model => model.EnderecoNovo.Telefone2)
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>
+                        <input id="btnSalvar" type="submit" value="Salvar" />
+                    </p>
+                </fieldset>
+            </div>
+
+        }
+
+        <div style="clear: both;">
             @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
         </div>
-  </div>
+    </div>
 </div>
 
 

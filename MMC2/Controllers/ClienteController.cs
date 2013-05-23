@@ -53,18 +53,22 @@ namespace MMC2.Controllers
         // POST: /Cliente/Create
 
         [HttpPost]
-        public ActionResult Create(Cliente cliente)
+        public ActionResult Create(SuperModel sm)
         {
             if (ModelState.IsValid)
             {
-                cliente.DataHora = DateTime.Now;
-                db.Clientes.Add(cliente);
+                sm.Cliente.DataHora = DateTime.Now;
+                sm.Cliente.Ativo = true;
+                //Endereco ed = new Endereco();
+                //ed = SM.EnderecoNovo;
+                sm.Cliente.Enderecos.Add(sm.EnderecoNovo);
+                db.Clientes.Add(sm.Cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
-            return View(cliente);
+            return View(sm);
         }
 
         [HttpPost]
