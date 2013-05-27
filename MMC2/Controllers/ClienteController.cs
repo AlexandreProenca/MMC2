@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Reporting.WebForms;
 using MMC2.Models;
 
 namespace MMC2.Controllers
@@ -35,6 +36,12 @@ namespace MMC2.Controllers
             return View(cliente);
         }
 
+        //public ActionResult GetClientes(string data)
+        //{
+        //    var clientes = (from a in db.Clientes where a.Ativo == true && a.Nome.Contains(data) orderby a.Nome select a).ToList();
+        //    return View(clientes);
+        //}
+
         //
         // GET: /Cliente/Create
 
@@ -42,6 +49,49 @@ namespace MMC2.Controllers
         {
             //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua");
             return View();
+        }
+
+        public ActionResult Relatorio()
+        {
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Report/ReportRelatorioProjeto.rdlc");
+            //var obj = (from a in db.vw_relatorio_projeto where a.id)
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", db.Clientes);
+            localReport.DataSources.Add(reportDataSource);
+
+            string reportType = "PDF";
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+            //The DeviceInfo settings should be changed based on the reportType
+            //http://msdn2.microsoft.com/en-us/library/ms155397.aspx
+            string deviceInfo =
+            "<DeviceInfo>" +
+            "  <OutputFormat>PDF</OutputFormat>" +
+            "  <PageWidth>8.5in</PageWidth>" +
+            "  <PageHeight>11in</PageHeight>" +
+            "  <MarginTop>0.5in</MarginTop>" +
+            "  <MarginLeft>1in</MarginLeft>" +
+            "  <MarginRight>1in</MarginRight>" +
+            "  <MarginBottom>0.5in</MarginBottom>" +
+            "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            //Render the report
+            renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+            //Response.AddHeader("content-disposition", "attachment; filename=NorthWindCustomers." + fileNameExtension);
+            return File(renderedBytes, mimeType);
         }
 
         public ActionResult CreateEndereco()
@@ -53,18 +103,22 @@ namespace MMC2.Controllers
         // POST: /Cliente/Create
 
         [HttpPost]
-        public ActionResult Create(Cliente cliente)
+        public ActionResult Create(SuperModel sm)
         {
             if (ModelState.IsValid)
             {
-                cliente.DataHora = DateTime.Now;
-                db.Clientes.Add(cliente);
+                sm.Cliente.DataHora = DateTime.Now;
+                sm.Cliente.Ativo = true;
+                //Endereco ed = new Endereco();
+                //ed = SM.EnderecoNovo;
+                sm.Cliente.Enderecos.Add(sm.EnderecoNovo);
+                db.Clientes.Add(sm.Cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             //ViewBag.Endereco_Id = new SelectList(db.Enderecos, "Id", "Rua", cliente.Endereco_Id);
-            return View(cliente);
+            return View(sm);
         }
 
         [HttpPost]

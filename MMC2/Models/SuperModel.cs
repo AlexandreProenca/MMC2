@@ -9,5 +9,6 @@ namespace MMC2.Models
     {
         public Cliente Cliente { get; set; }
         public IEnumerable<MMC2.Models.Endereco> Endereco { get; set; }
+        public Endereco EnderecoNovo { get; set; }
     }
 }

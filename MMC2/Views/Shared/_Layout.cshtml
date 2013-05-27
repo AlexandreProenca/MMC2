@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - MHC</title>
+    <title>@ViewBag.Title - SGHP</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="~/Content/cupertino/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -13,7 +14,7 @@
     <header>
         <div class="content-wrapper">
             <div class="float-left">
-                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                <p class="site-title">@Html.ActionLink("SGHP - Software", "Index", "Home")</p>
             </div>
             <div class="float-right">
                 <section id="login">
@@ -21,33 +22,36 @@
                 </section>
                 <nav>
                     <ul id="menu">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
-                        <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
-                        <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
-                        <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
-                        <li>@Html.ActionLink("Skills", "Index", "Skill")</li>
-                        <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
-                        <li>@Html.ActionLink("Status", "Index", "Status")</li>
-                        <li>@Html.ActionLink("Setores", "Index", "Setor")</li>
+                       
+                 
+                       
                         @if (Session["-USUARIO"] != null)
                         {
-                            if (Session["-PAPEL"].ToString() == "Funcionário")
+                            if (Session["-PAPEL"].ToString() == "Desenvolvedor" )
                             {
                             <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
                             <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
                             }
                             else if (Session["-PAPEL"].ToString() == "Gerente")
                             {
+                                
+                            <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
                             <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
                             <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
                             <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
-                            <li>@Html.ActionLink("Skills", "Index", "Skill")</li>
+                            <li>@Html.ActionLink("Atribuir habilidades", "Index", "Skill")</li>
                             }
                             else if (Session["-PAPEL"].ToString() == "Administrador")
                             {
-
+                                    <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
+                                    <li>@Html.ActionLink("Históricos", "Index", "Historico")</li>
+                                    <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
+                                    <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
+                                    <li>@Html.ActionLink("Atribuir habilidades", "Index", "Skill")</li>
+                                    <li>@Html.ActionLink("Habilidades", "Index", "TipoSkill")</li>
+                                    <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                                    <li>@Html.ActionLink("Status", "Index", "Status")</li>
+                                    <li>@Html.ActionLink("Setores", "Index", "Setor")</li>
                             }
                         }
                     </ul>
@@ -64,7 +68,7 @@
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                <p>&copy; @DateTime.Now.Year -SGHP Software de acompanhamento de tarefas em projetos de software</p>
             </div>
         </div>
     </footer>

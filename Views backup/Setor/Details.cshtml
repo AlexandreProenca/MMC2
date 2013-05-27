@@ -1,0 +1,54 @@
+﻿@model MMC2.Models.Setore
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#lnkEditar").button({ icons: { primary: "ui-icon-pencil" } });
+            $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+        });
+    </script>
+}
+
+
+<h2>Detalhes</h2>
+
+<fieldset>
+    <legend>Setores</legend>
+    <table>
+        <tr>
+            <td>
+                <table style="padding: 10px;">
+                    <tr>
+                        <td>
+                            <div class="display-label">
+                                @Html.DisplayNameFor(model => model.Nome)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.Nome)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { id = "lnkEditar" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</fieldset>

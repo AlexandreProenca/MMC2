@@ -18,7 +18,7 @@ namespace MMC2.Controllers
 
         public ActionResult Index()
         {
-            var skills = db.Skills.Include(s => s.Usuario);
+            var skills = db.Skills.Include(s => s.Usuario).Include(s => s.TipoSkill);
             return View(skills.ToList());
         }
 
@@ -41,6 +41,7 @@ namespace MMC2.Controllers
         public ActionResult Create()
         {
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome");
+            ViewBag.TipoSkills_Id = new SelectList(db.TipoSkills, "Id", "Nome");
             return View();
         }
 
@@ -58,6 +59,7 @@ namespace MMC2.Controllers
             }
 
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome", skill.Usuario_Id);
+            ViewBag.TipoSkills_Id = new SelectList(db.TipoSkills, "Id", "Nome", skill.TipoSkills_Id);
             return View(skill);
         }
 
@@ -72,6 +74,7 @@ namespace MMC2.Controllers
                 return HttpNotFound();
             }
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome", skill.Usuario_Id);
+            ViewBag.TipoSkills_Id = new SelectList(db.TipoSkills, "Id", "Nome", skill.TipoSkills_Id);
             return View(skill);
         }
 
@@ -88,6 +91,7 @@ namespace MMC2.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome", skill.Usuario_Id);
+            ViewBag.TipoSkills_Id = new SelectList(db.TipoSkills, "Id", "Nome", skill.TipoSkills_Id);
             return View(skill);
         }
 

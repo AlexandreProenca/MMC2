@@ -1,14 +1,35 @@
 ﻿@model MMC2.Models.Tarefa
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar tarefa";
 }
 
-<h2>Edit</h2>
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
+
+<h2>Editar tarefa de código @Model.Id</h2>
+
+<div id="Editar_tarefa">
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-
+     <div style=" border:1px; float:left;  margin:10px">
     <fieldset>
         <legend>Tarefa</legend>
 
@@ -26,7 +47,7 @@
             @Html.LabelFor(model => model.Descricao)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Descricao)
+            @Html.TextAreaFor(model => model.Descricao)
             @Html.ValidationMessageFor(model => model.Descricao)
         </div>
 
@@ -50,10 +71,29 @@
             @Html.LabelFor(model => model.Porcentagem)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Porcentagem)
-            @Html.ValidationMessageFor(model => model.Porcentagem)
-        </div>
+            @{
+                       var items = new List<SelectListItem>{
+                       new SelectListItem {Value = "10", Text = "10%"},
+                       new SelectListItem {Value = "20", Text = "20%"},
+                       new SelectListItem {Value = "30", Text = "30%"},
+                       new SelectListItem {Value = "40", Text = "40%"},
+                       new SelectListItem {Value = "50", Text = "50%"},
+                       new SelectListItem {Value = "60", Text = "60%"},
+                       new SelectListItem {Value = "70", Text = "70%"},
+                       new SelectListItem {Value = "80", Text = "80%"},
+                       new SelectListItem {Value = "90", Text = "90%"},
+                       new SelectListItem {Value = "100", Text = "Concluído"},
+                         };
+                }
 
+                @Html.DropDownList("Porcentagem", items)
+        </div>
+        </fieldset>
+  </div>
+  <div style=" border:1px; float:left;  margin:10px">
+
+      <fieldset>
+        <legend>Tarefa</legend>
         <div class="editor-label">
             @Html.LabelFor(model => model.Status_Id, "Status")
         </div>
@@ -94,16 +134,23 @@
             @Html.ValidationMessageFor(model => model.TempoEstimado)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Habilidade_Id, "Habilidade requerida")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Habilidade_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Habilidade_Id)
+        </div>
+
         <p>
-            <input type="submit" value="Save" />
+             <input type="submit" value="Atualizar" id="btnSalvar" />
         </p>
+
     </fieldset>
+  </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<div>
+   @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
+</div>

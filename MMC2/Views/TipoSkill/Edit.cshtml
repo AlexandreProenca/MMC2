@@ -1,0 +1,52 @@
+﻿@model MMC2.Models.TipoSkill
+
+@{
+    ViewBag.Title = "Editar Habilidade";
+}
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
+<h2>Editar Habilidade</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TipoSkill</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" id="btnSalvar"/>
+        </p>
+    </fieldset>
+}
+
+<div>
+   @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
+</div>
+
+

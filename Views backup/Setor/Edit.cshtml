@@ -1,0 +1,60 @@
+﻿@model MMC2.Models.Setore
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    <script src="~/Scripts/price_format.1.7.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            });
+        });
+    </script>
+}
+
+<h2>Editar</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Setores</legend>
+        <table>
+            <tr>
+                <td>
+                    <table style="padding: 10px;">
+                        <tr>
+                            <td>
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.Nome)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.Nome)
+                                    @Html.ValidationMessageFor(model => model.Nome)
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" id="btnSalvar" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
+</div>

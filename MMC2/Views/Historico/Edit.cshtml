@@ -1,10 +1,28 @@
 ﻿@model MMC2.Models.Historico
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Historicos";
 }
 
-<h2>Edit</h2>
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
+<h2>Editar Historico</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -55,15 +73,12 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Atualizar historico" id="btnSalvar" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -1,0 +1,130 @@
+﻿@model MMC2.Models.Projeto
+
+@{
+    ViewBag.Title = "Details";
+}
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
+
+<h2>Detalhes do Projeto</h2>
+
+<div id="detalhes_projeto">
+
+    <table>
+        <tr>
+            <td>
+
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Nome)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DataInicio)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataInicio)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DataFinal)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataFinal)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Descricao)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Status.Nome)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Status.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Cliente.Nome)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Cliente.Nome)
+                </div>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Gerente.Nome)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Gerente.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DataHora)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataHora)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Valor)
+                </div>
+                <div class="display-field">
+                @Html.DisplayFor(model => model.Valor)
+            </td>
+        </tr>
+
+    </table>
+
+    <p>
+     <div>   
+    @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
+     </div>
+    </p>
+
+</div>
+

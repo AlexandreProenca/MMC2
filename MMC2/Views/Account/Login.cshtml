@@ -1,7 +1,7 @@
 ﻿@model MMC2.Models.Usuario
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Acesso ao Sistema";
 }
 
 <hgroup class="title">
@@ -9,7 +9,7 @@
 </hgroup>
 
 <section id="loginForm">
-<h2>Login de acesso ao sistema.</h2>
+<h2></h2>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -32,11 +32,9 @@
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
             </li>*@
         </ol>
-        <input type="submit" value="Log in" />
+        <input type="submit" value="Entrar" />
     </fieldset>
-    <p>
-        @Html.ActionLink("Esqueci minha senha.", "Lembrar")
-    </p>
+    
 }
 </section>
 

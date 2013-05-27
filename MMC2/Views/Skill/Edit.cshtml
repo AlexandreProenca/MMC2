@@ -1,85 +1,67 @@
 ﻿@model MMC2.Models.Skill
 
 @{
-    ViewBag.Title = "Editar";
+    ViewBag.Title = "Editar habilidades atribuidas";
 }
-
 @section Scripts {
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="~/Scripts/jquery.maskedinput.js"></script>
-    <script src="~/Scripts/price_format.1.7.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
+           
             $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
             $("#btnSalvar").button({
                 icons: {
                     primary: "ui-icon-disk"
                 },
                 text: false
-            });
+            })
         });
     </script>
 }
+<h2>Editar habilidades atribuida</h2>
 
-<h2>Editar</h2>
-
-@using (Html.BeginForm())
-{
+@using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Skill</legend>
 
         @Html.HiddenFor(model => model.Id)
-        <table>
-            <tr>
-                <td>
-                    <table style="padding: 10px;">
-                        <tr>
-                            <td>
-                                <div class="editor-label">
-                                    @Html.LabelFor(model => model.Usuario_Id, "Usuario")
-                                </div>
-                                <div class="editor-field">
-                                    @Html.DropDownList("Usuario_Id", String.Empty)
-                                    @Html.ValidationMessageFor(model => model.Usuario_Id)
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table style="padding: 10px;">
-                        <tr>
-                            <td>
-                                <div class="editor-label">
-                                    @Html.LabelFor(model => model.Nivel)
-                                </div>
-                                <div class="editor-field">
-                                    @Html.EditorFor(model => model.Nivel)
-                                    @Html.ValidationMessageFor(model => model.Nivel)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="editor-label">
-                                    @Html.LabelFor(model => model.SkillTipo)
-                                </div>
-                                <div class="editor-field">
-                                    @Html.EditorFor(model => model.SkillTipo)
-                                    @Html.ValidationMessageFor(model => model.SkillTipo)
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nivel)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nivel)
+            @Html.ValidationMessageFor(model => model.Nivel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Usuario_Id, "Desenvolvedor")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Usuario_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Usuario_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoSkills_Id, "Habilidoso em")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TipoSkills_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.TipoSkills_Id)
+        </div>
+
         <p>
-            <input type="submit" id="btnSalvar" value="Save" />
+            <input type="submit" value="Atualizar" id="btnSalvar" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
+     @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
 </div>
+

@@ -3,69 +3,128 @@
 @{
     ViewBag.Title = "Details";
 }
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
 
-<h2>Details</h2>
+<h2>Detalhes do Projeto</h2>
 
-<fieldset>
-    <legend>Projeto</legend>
+<div id="detalhes_projeto">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nome)
-    </div>
+    <table>
+        <tr>
+            <td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataInicio)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataInicio)
-    </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Nome)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DataInicio)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataInicio)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DataFinal)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataFinal)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Descricao)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayName("Status do Projeto")
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Status.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayName("Cliente")
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Cliente.Nome)
+                </div>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayName("Gerente do Projeto")
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Usuario.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayName("Data de criação do projeto")
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataHora)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayName("Valor estimado")
+                </div>
+                <div class="display-field">
+                @Html.DisplayFor(model => model.Valor)
+            </td>
+        </tr>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataFinal)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataFinal)
-    </div>
+    </table>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Descricao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Descricao)
-    </div>
+    <p>
+     <div>   
+    @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
+     </div>
+    </p>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Status.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Status.Nome)
-    </div>
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Cliente.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Cliente.Nome)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataHora)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataHora)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Valor)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Valor)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

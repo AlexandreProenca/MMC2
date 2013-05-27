@@ -17,14 +17,14 @@
     </script>
 }
 
-<h2>Usuários</h2>
+<h2>Gerenciamento de Usuários</h2>
 
 <p>
     @Html.ActionLink("Criar Novo", "Create", null, new { id = "lnkNovo" })
 </p>
 
 
-<div id="gridContentClientes">
+<div id="gridUsuario">
 @grid.GetHtml(
     tableStyle: "gridTable",
     headerStyle: "gridHead", 
@@ -37,6 +37,7 @@
     grid.Column("Email",header:"Email"),
     grid.Column("TipoUsuario",header:"Papel"),
     grid.Column("",header:"",format:@<text> <a href="@Url.Action("Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
-    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn")
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Delete", new { id=item.Id })"><img src="~/Images/bt_excluir.png" title="Remover" /> </a></text>, style:"gridBtn")
 })
 </div>

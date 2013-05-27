@@ -1,0 +1,51 @@
+﻿@model MMC2.Models.Skill
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Skill</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nivel)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nivel)
+            @Html.ValidationMessageFor(model => model.Nivel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Usuario_Id, "Usuario")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Usuario_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Usuario_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TipoSkills_Id, "TipoSkill")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TipoSkills_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.TipoSkills_Id)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

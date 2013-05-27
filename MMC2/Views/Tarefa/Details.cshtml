@@ -1,85 +1,171 @@
 ﻿@model MMC2.Models.Tarefa
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes da tarefa";
 }
 
-<h2>Details</h2>
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
+
+
+<h2>Visualização da tarefa de código: @Model.Id </h2>
 
 <fieldset>
     <legend>Tarefa</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Nome)
+                </div>
+           
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Nome)
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Nome)
-    </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Descricao)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Descricao)
-    </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataInicio)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataInicio)
-    </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Descricao)
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DataFinal)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DataFinal)
-    </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Porcentagem)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Porcentagem)
-    </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DataInicio)
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Status.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Status.Nome)
-    </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataInicio)
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Projeto.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Projeto.Nome)
-    </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.DataFinal)
+                </div>
+      
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.DataFinal)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Prioridade)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Prioridade)
-    </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Porcentagem)
+                </div>
+       
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Porcentagem)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayName("Status da tarefa")
+                </div>
+        
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Status.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Usuario.Nome)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Usuario.Nome)
-    </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Projeto.Nome)
+                </div>
+         
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Projeto.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TempoEstimado)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TempoEstimado)
-    </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Prioridade)
+                </div>
+         
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Prioridade)
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <div class="display-label">
+                    @Html.DisplayName("Executor da tarefa")
+                </div>
+           
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Usuario.Nome)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.TempoEstimado)
+                </div>
+            
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.TempoEstimado)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+                <div class="display-label">
+                    @Html.DisplayName("Habilidade requerida")
+                </div>
+            
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.TipoSkill.Nome)
+
+
+                </div>
+            </td>
+        </tr>
+    </table>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+   
+     @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
 </p>

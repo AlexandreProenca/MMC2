@@ -1,20 +1,46 @@
 ﻿@model MMC2.Models.Historico
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes do históricos";
+}
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
 }
 
-<h2>Details</h2>
+<h2>Visualização do Histórico código: @Model.Id</h2>
 
+<div id="detalhes_historico">
 <fieldset>
-    <legend>Historico</legend>
+    <legend>Histórico</legend>
 
+    <table>
+        <tr>
+            <td>
     <div class="display-label">
          @Html.DisplayNameFor(model => model.QtdHoras)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.QtdHoras)
     </div>
+                </td>
+         </tr>
+        <tr>
+            <td>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.DataLancamento)
@@ -22,29 +48,42 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.DataLancamento)
     </div>
-
+                     </td>
+         </tr>
+        <tr>
+            <td>
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Descrição)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Descrição)
     </div>
-
+                     </td>
+         </tr>
+        <tr>
+            <td>
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Tarefa.Nome)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Tarefa.Nome)
     </div>
-
+                     </td>
+         </tr>
+        <tr>
+            <td>
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Usuario.Nome)
+         @Html.DisplayName("Dono do histórico")
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Usuario.Nome)
     </div>
+                     </td>
+         </tr>
+        </table>
 </fieldset>
+   
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar para a Lista", "Index", null, new { id = "lnkVoltar" })
 </p>
+    </div>

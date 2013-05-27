@@ -31,7 +31,7 @@
     </script>
 }
 
-<h2>Novo</h2>
+<h2>Novo Usuário</h2>
 
 @using (Html.BeginForm())
 {
@@ -57,7 +57,7 @@
                             <td>
 
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.Setor_Id, "Setore")
+                                    @Html.LabelFor(model => model.Setor_Id, "Setor")
                                 </div>
                                 <div class="editor-field">
                                     @Html.DropDownList("Setor_Id", String.Empty)
@@ -93,16 +93,23 @@
                         <tr>
                             <td>
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.TipoUsuario)
+                                    @Html.LabelFor(model => model.TipoUsuario,"Perfil")
                                 </div>
                                 <div class="editor-field">
-                                    @Html.EditorFor(model => model.TipoUsuario)
-                                    @Html.ValidationMessageFor(model => model.TipoUsuario)
+                                    @{
+                                        var items = new List<SelectListItem>{
+                                        new SelectListItem {Value = "Desenvolvedor", Text = "Desenvolvedor"},
+                                        new SelectListItem {Value = "Gerente", Text = "Gerente de projetos"},
+                                        new SelectListItem {Value = "Administrador", Text = "Administrador do sistema"},
+                                        };
+                                    }
+
+                                    @Html.DropDownList("TipoUsuario", items)
                                 </div>
                             </td>
                             <td>
                                 <div class="editor-label">
-                                    @Html.LabelFor(model => model.CustoHora)
+                                    @Html.LabelFor(model => model.CustoHora, "Valor custo/hora")
                                 </div>
                                 <div class="editor-field">
                                     @Html.EditorFor(model => model.CustoHora)
@@ -111,7 +118,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table style="padding: 10px;">
+                   @* <table style="padding: 10px;">
                         <tr>
                             <td>
                                 <div class="editor-label">
@@ -123,12 +130,12 @@
                                 </div>
                             </td>
                         </tr>
-                    </table>
+                    </table>*@
                 </td>
             </tr>
         </table>
         <p>
-            <input type="submit" id="btnSalvar" value="Create" />
+            <input type="submit" id="btnSalvar" value="Criar" />
         </p>
     </fieldset>
 }

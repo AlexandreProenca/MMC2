@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MMC2.Models.Skill>
+
+@{
+   
+    ViewBag.Title = "Recurso";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridRecurso");
+}
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //id do link button com o icone que vai usar
+            $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+        });
+    </script>
+}
+
+<h2>Recursos Sugeridos</h2>
+
+<div id="gridRecurso">
+
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead", 
+    footerStyle:"gridFooter",
+	rowStyle:"gridRow", 
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-recurso" },
+    columns: new [] {
+    grid.Column(header: "Selecionar", format: @<text><input class="check-box" id="id_skill" name="id_skill" type="checkbox" value="@item.Id" /></text>),
+    grid.Column("Usuario.Nome",header:"Nome"),
+    grid.Column("TipoSkill.Nome",header:"Habilidade"),
+    grid.Column("Nivel",header:"Experiência"),
+       
+})
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+     <p>
+            <input type="hidden" id="id_user" name="id_user" value="9" />
+            <input type="submit" value="Criar tarefa" id="lnkNovo" />
+     </p>
+    
+        
+        
+    } 
+  @*  <p style="text-align:right">
+    @Html.ActionLink("Criar tarefa", "Create",null, new { id = "lnkNovo" })
+    </p>*@
+
+
+</div>
+
+    
+}
+
+@*<p style="text-align:right">
+    @Html.ActionLink("", "Index",null, new { id = "lnkNovo" })
+</p>*@
+

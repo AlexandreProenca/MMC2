@@ -3,15 +3,33 @@
 @{
     ViewBag.Title = "Novo";
 }
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-<h2>Novo</h2>
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
+<h2>Incluir Histórico</h2>
 
-@using (Html.BeginForm()) {
+<div id="criar_historico">
+
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Historico</legend>
-
+  <div style=" border:1px; float:left;  margin:10px">
         <div class="editor-label">
             @Html.LabelFor(model => model.QtdHoras)
         </div>
@@ -32,36 +50,36 @@
             @Html.LabelFor(model => model.Descrição)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Descrição)
+            @Html.TextAreaFor(model => model.Descrição)
             @Html.ValidationMessageFor(model => model.Descrição)
         </div>
-
+      </div>
+       <div style=" border:1px; float:left;  margin:10px">
         <div class="editor-label">
-            @Html.LabelFor(model => model.Tarefa_Id, "Tarefa")
+            @Html.LabelFor(model => model.Tarefa_Id, "Tarefa relacionada")
         </div>
         <div class="editor-field">
             @Html.DropDownList("Tarefa_Id", String.Empty)
             @Html.ValidationMessageFor(model => model.Tarefa_Id)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Usuario_Id, "Usuario")
+      @*  <div class="editor-label">
+            @Html.LabelFor(model => model.Usuario_Id, "Usuario Executor")
         </div>
         <div class="editor-field">
             @Html.DropDownList("Usuario_Id", String.Empty)
             @Html.ValidationMessageFor(model => model.Usuario_Id)
-        </div>
+        </div>*@
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Criar histórico" id="btnSalvar"/>
         </p>
-    </fieldset>
+           <div>
+    @Html.ActionLink("Voltar para a Lista", "Index", null, new { id = "lnkVoltar" })
+</div>
+           </div>
+ 
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+

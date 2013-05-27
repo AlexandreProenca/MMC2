@@ -1,0 +1,157 @@
+﻿@model MMC2.Models.SuperModel
+
+@{
+    ViewBag.Title = "Editar";
+    WebGrid grid = new WebGrid(Model.Endereco, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //Instância da tabs
+            $("#tabs").tabs();
+            $("#Cliente_DataHora").datepicker();
+            $("#Cliente_Cnpj").mask("99.999.999/9999-99");
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#lnkNovo").button({ icons: { primary: "ui-icon-disk" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            });
+        });
+    </script>
+}
+
+<h2>@Html.DisplayFor(model => model.Cliente.Nome)</h2>
+
+div principal
+<div id="tabs">
+    <ul>
+        as referências das tabs
+        <li><a href="#tabs-1">Editar</a></li>
+        <li><a href="#tabs-2">Endereços</a></li>
+    </ul>
+    e as tabs filhas
+    <div id="tabs-1">
+        sacó?
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Cliente</legend>
+
+                @Html.HiddenFor(model => Model.Cliente.Id)
+
+                <table>
+                    <tr>
+                        <td>
+                            <table style="padding: 10px;">
+                                <tr>
+                                    <td>
+                                        <div class="editor-label">
+                                            @Html.LabelFor(model => model.Cliente.Nome)
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.Cliente.Nome)
+                                            @Html.ValidationMessageFor(model => model.Cliente.Nome)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="editor-label">
+                                            @Html.LabelFor(model => model.Cliente.Email)
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.Cliente.Email)
+                                            @Html.ValidationMessageFor(model => model.Cliente.Email)
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="padding: 10px;">
+
+                                <tr>
+                                    <td>
+                                        <div class="editor-label">
+                                            @Html.LabelFor(model => model.Cliente.Site)
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.Cliente.Site)
+                                            @Html.ValidationMessageFor(model => model.Cliente.Site)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="editor-label">
+                                            @Html.LabelFor(model => model.Cliente.Cnpj)
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.Cliente.Cnpj)
+                                            @Html.ValidationMessageFor(model => model.Cliente.Cnpj)
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="padding: 10px;">
+                                <tr>
+                                    <td>
+                                        <div class="editor-label">
+                                            @Html.LabelFor(model => model.Cliente.Ativo)
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.Cliente.Ativo)
+                                            @Html.ValidationMessageFor(model => model.Cliente.Ativo)
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <input id="btnSalvar" type="submit" value="Salvar" />
+                </p>
+            </fieldset>
+        }
+
+        <div>
+            @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
+        </div>
+
+    </div>
+    <div id="tabs-2">
+
+
+        <h2>Endereço</h2>
+
+        <p>
+            @Html.ActionLink("Novo", "CreateEndereco", new { idCliente=Model.Cliente.Id.ToString() }, new { id = "lnkNovo" })
+        </p>
+
+        <div id="gridContent">
+            @grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-dash" },
+    columns: new[] {
+    grid.Column("Rua",header:"Rua"),
+    grid.Column("Numero",header:"Número"),
+    grid.Column("Bairro",header:"Bairro"),
+    grid.Column("Telefone1",header:"Telefone 1"),
+    grid.Column("Telefone2",header:"Telefone 2"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("EditEndereco", new { id=item.Id, idCliente=item.Cliente_id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("DeleteEndereco", new { id=item.Id, idCliente=item.Cliente_id })"><img src="~/Images/bt_excluir.png" title="Excluir" /></a> </text>, style:"gridBtn")
+})
+        </div>
+
+    </div>
+</div>

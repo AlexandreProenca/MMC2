@@ -37,23 +37,46 @@ namespace MMC2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Usuario usuario, string returnUrl)
+        public ActionResult Login(Usuario model, string returnUrl)
         {
-            var obj = (from a in db.Usuarios 
-                       where a.Email.ToLower().Equals(usuario.Email) && a.Senha.Equals(usuario.Senha) && a.Ativo == true 
-                       select a).FirstOrDefault();
-            if (ModelState.IsValid && obj != null)
+            bool remember = false;
+
+            if (ModelState.IsValid && WebSecurity.Login(model.Email, model.Senha, persistCookie: remember))
             {
-                Session["-USUARIO"] = obj.Id;
-                Session["-PAPEL"] = obj.TipoUsuario;
-                Session["-USUARIO_NOME"] = obj.Nome;
-                return RedirectToAction(returnUrl);
+                //return RedirectToLocal(returnUrl);
+
+                var obj = (from a in db.Usuarios
+                           where a.Email.ToLower().Equals(model.Email) && a.Senha.Equals(model.Senha) && a.Ativo == true
+                           select a).FirstOrDefault();
+
+                //if (ModelState.IsValid && obj != null)
+                
+                    Session["-USUARIO"] = obj.Id;
+                    Session["-PAPEL"] = obj.TipoUsuario;
+                    Session["-USUARIO_NOME"] = obj.Nome;
+
+                
+
+                if (obj.TipoUsuario == "Desenvolvedor")
+                {
+                    return RedirectToAction("Index", "Tarefa");
+                }
+                else if (obj.TipoUsuario == "Gerente")
+                {
+                    return RedirectToAction("Index", "Projeto");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
             }
+
 
             //ViewBag.Endereco_Id
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "O e-mail ou a senha estão incorretos.");
-            return View(usuario);
+            return View(model);
         }
 
         //
@@ -64,6 +87,9 @@ namespace MMC2.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
+            Session["-USUARIO"] = null;
+            Session["-PAPEL"] = null;
+            Session["-USUARIO_NOME"] = null;
 
             return RedirectToAction("Index", "Home");
         }

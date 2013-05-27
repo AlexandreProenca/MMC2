@@ -1,0 +1,43 @@
+﻿@model MMC2.Models.TipoSkill
+
+@{
+    ViewBag.Title = "Excluir habilidade";
+}
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
+}
+<h2>Excluir habilidade</h2>
+
+<h3 style="color:red;">Você tem certeza que deseja remover esta habilidade?</h3>
+
+<fieldset>
+    <legend>TipoSkill</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nome)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+         <input type="submit" value="Excluir habilidade" id="btnSalvar"/> 
+        @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
+    </p>
+}

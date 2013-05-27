@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MMC2.Models.Cliente>
+
+@{
+    ViewBag.Title = "Clientes";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
+
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //id do link button com o icone que vai usar
+            $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+        });
+    </script>
+}
+
+<h2>Clientes</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo", "Create", null, new { id = "lnkNovo" })
+</p>
+
+<div id="gridContentClientes">
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead", 
+    footerStyle:"gridFooter",
+	rowStyle:"gridRow", 
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-dash" },
+    columns: new [] {
+    grid.Column("Nome",header:"Cliente"),
+    grid.Column("Cnpj",header:"CNPJ"),
+    grid.Column("Email",header:"E-Mail"),
+    grid.Column("Site",header:"Site"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn")
+  
+
+})
+
+   
+</div>
+    
+ @*grid.Column(header: "Check", style: "labelcolumn",
+  format: @<text><input class="check-box" id="assignChkBx" name="assignChkBx" type="checkbox" value="@item.Id" /></text>),*@

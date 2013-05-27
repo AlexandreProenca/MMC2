@@ -1,9 +1,8 @@
 ﻿@model MMC2.Models.Skill
 
 @{
-    ViewBag.Title = "Detalhes";
+    ViewBag.Title = "Detalhes das Habilidades";
 }
-
 @section Scripts {
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
@@ -11,67 +10,44 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
+
             $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
-            $("#lnkEditar").button({ icons: { primary: "ui-icon-pencil" } });
-            $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
         });
     </script>
 }
-
-<h2>Detalhes</h2>
+<h2>Detalhes da atribuição</h2>
 
 <fieldset>
     <legend>Skill</legend>
-    <table>
-        <tr>
-            <td>
-                <table style="padding: 10px;">
-                    <tr>
-                        <td>
-                            <div class="display-label">
-                                @Html.DisplayNameFor(model => model.Usuario.Nome)
-                            </div>
-                        </td>
-                        <td>
-                            <div class="display-field">
-                                @Html.DisplayFor(model => model.Usuario.Nome)
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="display-label">
-                                @Html.DisplayNameFor(model => model.SkillTipo):
-                            </div>
-                        </td>
-                        <td>
-                            <div class="display-field">
-                                @Html.DisplayFor(model => model.SkillTipo)
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="display-label">
-                                @Html.DisplayNameFor(model => model.Nivel):
-                            </div>
-                        </td>
-                        <td>
-                            <div class="display-field">
-                                @Html.DisplayFor(model => model.Nivel)
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { id = "lnkEditar" })
-                        </td>
-                        <td>
-                            @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nivel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nivel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Usuario.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Usuario.Nome)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TipoSkill.Nome)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TipoSkill.Nome)
+    </div>
 </fieldset>
+<p>
+    
+    @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
+</p>

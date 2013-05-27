@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - MHC</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/cupertino/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
+                        <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
+                        <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
+                        <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
+                        <li>@Html.ActionLink("Skills", "Index", "Skill")</li>
+                        <li>@Html.ActionLink("Habilidades", "Index", "TipoSkill")</li>
+                        <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                        <li>@Html.ActionLink("Status", "Index", "Status")</li>
+                        <li>@Html.ActionLink("Setores", "Index", "Setor")</li>
+                        @if (Session["-USUARIO"] != null)
+                        {
+                            if (Session["-PAPEL"].ToString() == "Funcionário")
+                            {
+                            <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
+                            <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
+                            }
+                            else if (Session["-PAPEL"].ToString() == "Gerente")
+                            {
+                            <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
+                            <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
+                            <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
+                            <li>@Html.ActionLink("Skills", "Index", "Skill")</li>
+                            }
+                            else if (Session["-PAPEL"].ToString() == "Administrador")
+                            {
+
+                            }
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

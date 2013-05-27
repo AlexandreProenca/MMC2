@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,11 +39,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -50,12 +55,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -112,6 +114,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
@@ -165,13 +168,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\DashbordController.cs" />
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\HistoricoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjetoController.cs" />
+    <Compile Include="Controllers\RecursoController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TarefaController.cs" />
+    <Compile Include="Controllers\TipoSkillController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -215,13 +221,16 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SuperModel.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Tarefa.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoSkill.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_relatorio_projeto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -323,6 +332,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\MMC2_Publish.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -340,7 +350,9 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\price_format.1.7.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -394,26 +406,11 @@
     <Content Include="Views\Historico\Create.cshtml" />
     <Content Include="Views\Historico\Edit.cshtml" />
     <Content Include="Views\Historico\Delete.cshtml" />
-    <Content Include="Views\Projeto\Index.cshtml" />
-    <Content Include="Views\Projeto\Details.cshtml" />
-    <Content Include="Views\Projeto\Create.cshtml" />
-    <Content Include="Views\Projeto\Edit.cshtml" />
-    <Content Include="Views\Projeto\Delete.cshtml" />
-    <Content Include="Views\Skill\Index.cshtml" />
-    <Content Include="Views\Skill\Details.cshtml" />
-    <Content Include="Views\Skill\Create.cshtml" />
-    <Content Include="Views\Skill\Edit.cshtml" />
-    <Content Include="Views\Skill\Delete.cshtml" />
     <Content Include="Views\Status\Index.cshtml" />
     <Content Include="Views\Status\Details.cshtml" />
     <Content Include="Views\Status\Create.cshtml" />
     <Content Include="Views\Status\Edit.cshtml" />
     <Content Include="Views\Status\Delete.cshtml" />
-    <Content Include="Views\Tarefa\Index.cshtml" />
-    <Content Include="Views\Tarefa\Details.cshtml" />
-    <Content Include="Views\Tarefa\Create.cshtml" />
-    <Content Include="Views\Tarefa\Edit.cshtml" />
-    <Content Include="Views\Tarefa\Delete.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
@@ -425,8 +422,38 @@
     <Content Include="Views\Setor\Edit.cshtml" />
     <Content Include="Views\Setor\Delete.cshtml" />
     <Content Include="Views\Account\Lembrar.cshtml" />
+    <Content Include="Views\Skill\Index.cshtml" />
+    <Content Include="Views\Skill\Details.cshtml" />
+    <Content Include="Views\Skill\Create.cshtml" />
+    <Content Include="Views\Skill\Edit.cshtml" />
+    <Content Include="Views\Skill\Delete.cshtml" />
+    <Content Include="Views\TipoSkill\Index.cshtml" />
+    <Content Include="Views\TipoSkill\Details.cshtml" />
+    <Content Include="Views\TipoSkill\Create.cshtml" />
+    <Content Include="Views\TipoSkill\Edit.cshtml" />
+    <Content Include="Views\TipoSkill\Delete.cshtml" />
+    <Content Include="Views\Projeto\Index.cshtml" />
+    <Content Include="Views\Projeto\Details.cshtml" />
+    <Content Include="Views\Projeto\Create.cshtml" />
+    <Content Include="Views\Projeto\Edit.cshtml" />
+    <Content Include="Views\Projeto\Delete.cshtml" />
+    <Content Include="Views\Tarefa\Index.cshtml" />
+    <Content Include="Views\Tarefa\Details.cshtml" />
+    <Content Include="Views\Tarefa\Create.cshtml" />
+    <Content Include="Views\Tarefa\Edit.cshtml" />
+    <Content Include="Views\Tarefa\Delete.cshtml" />
+    <Content Include="Views\Dashbord\_Projetos.cshtml" />
+    <Content Include="Views\Dashbord\Index.cshtml" />
+    <Content Include="Views\Recurso\Index.cshtml" />
+    <Content Include="Views\Recurso\Details.cshtml" />
+    <Content Include="Views\Recurso\Create.cshtml" />
+    <Content Include="Views\Recurso\Edit.cshtml" />
+    <Content Include="Views\Recurso\Delete.cshtml" />
+    <Content Include="Views\Tarefa\Recurso.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Report\Report1.rdlc" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MMC2.Models.Status>
+
+@{
+    ViewBag.Title = "Status";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "gridContent");
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+        });
+    </script>
+}
+
+<h2>Status</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo", "Create", null, new { id = "lnkNovo" })
+</p>
+
+
+<div id="gridContentClientes">
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead", 
+    footerStyle:"gridFooter",
+	rowStyle:"gridRow", 
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-dash" },
+    columns: new [] {
+    grid.Column("Nome",header:"Status"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn")
+})
+</div>

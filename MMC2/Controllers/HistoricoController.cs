@@ -53,6 +53,7 @@ namespace MMC2.Controllers
         {
             if (ModelState.IsValid)
             {
+                historico.Usuario_Id = (int)Session["-USUARIO"]; 
                 db.Historicos.Add(historico);
                 db.SaveChanges();
                 return RedirectToAction("Index");

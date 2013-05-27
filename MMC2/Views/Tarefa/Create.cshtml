@@ -1,107 +1,143 @@
 ﻿@model MMC2.Models.Tarefa
 
+
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Nova Tarefa";
+}
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+        });
+    </script>
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+<h2>Nova Tarefa</h2>
+<div id="criar_tarefa">
 
-    <fieldset>
-        <legend>Tarefa</legend>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div style=" border:1px; float:left;  margin:10px">
+        <fieldset>
+            <legend>Tarefa</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Nome)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nome)
-            @Html.ValidationMessageFor(model => model.Nome)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Nome,"* Nome de identificação")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Nome)
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Descricao)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Descricao)
-            @Html.ValidationMessageFor(model => model.Descricao)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Descricao,"* Descrição da tarefa")
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Descricao)
+                @Html.ValidationMessageFor(model => model.Descricao)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataInicio)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataInicio)
-            @Html.ValidationMessageFor(model => model.DataInicio)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DataInicio, "* Início")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DataInicio)
+                @Html.ValidationMessageFor(model => model.DataInicio)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DataFinal)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DataFinal)
-            @Html.ValidationMessageFor(model => model.DataFinal)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DataFinal, "* Entrega")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DataFinal)
+                @Html.ValidationMessageFor(model => model.DataFinal)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Porcentagem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Porcentagem)
-            @Html.ValidationMessageFor(model => model.Porcentagem)
-        </div>
+            
+            </fieldset>
+</div>
+         <div style=" border:1px; float:left;  margin:10px">
+             <fieldset>
+       <legend>Tarefa</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Status_Id, "Status")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Status_Id", String.Empty)
-            @Html.ValidationMessageFor(model => model.Status_Id)
-        </div>
+                   <div class="editor-label">
+                @Html.LabelFor(model => model.Habilidade_Id, "* Habilidade requerida")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Habilidade_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.Habilidade_Id)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Projeto_Id, "Projeto")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Projeto_Id", String.Empty)
-            @Html.ValidationMessageFor(model => model.Projeto_Id)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Projeto_Id, "* Projeto referente")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Projeto_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.Projeto_Id)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Prioridade)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Prioridade)
-            @Html.ValidationMessageFor(model => model.Prioridade)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Prioridade, "* Prioridade")
+            </div>
+            <div class="editor-field">
+                 
+                @{
+                       var items = new List<SelectListItem>{
+                       new SelectListItem {Value = "Alta", Text = "Alta"},
+                       new SelectListItem {Value = "Media", Text = "Media"},
+                       new SelectListItem {Value = "Baixa", Text = "Baixa"},
+                         };
+                }
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Usuario_Id, "Usuario")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Usuario_Id", String.Empty)
-            @Html.ValidationMessageFor(model => model.Usuario_Id)
-        </div>
+                @Html.DropDownList("Prioridade", items)
+               
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TempoEstimado)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TempoEstimado)
-            @Html.ValidationMessageFor(model => model.TempoEstimado)
-        </div>
+          @*  <div class="editor-label">
+                @Html.LabelFor(model => model.Usuario_Id, "* Executor da tarefa")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Usuario_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.Usuario_Id)
+            </div>*@
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TempoEstimado, "* Tempo estimado em horas cheias")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.TempoEstimado)
+                @Html.ValidationMessageFor(model => model.TempoEstimado)
+            </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+          
+                
+            <p>
+                <input type="submit" value="Escolher recurso" id="btnSalvar" />
+            </p>
+                
+        </fieldset>
+
+              </div>
+      
+    }
+
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<div>
+    
+    @Html.ActionLink("Voltar para a Lista", "Index", null, new { id = "lnkVoltar" })
+</div>
+
+

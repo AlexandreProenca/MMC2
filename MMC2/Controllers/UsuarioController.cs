@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
+
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using DotNetOpenAuth.AspNet;
+using Microsoft.Web.WebPages.OAuth;
+using WebMatrix.WebData;
+using MMC2.Filters;
 using MMC2.Models;
 
 namespace MMC2.Controllers
@@ -52,6 +59,17 @@ namespace MMC2.Controllers
         {
             if (ModelState.IsValid)
             {
+                try
+                {
+                    WebSecurity.CreateUserAndAccount(usuario.Email, usuario.Senha);
+                    WebSecurity.Login(usuario.Email, usuario.Senha);
+                    
+                }
+                catch (MembershipCreateUserException e)
+                {
+                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                }
+                usuario.Ativo = true;
                 usuario.DataHora = DateTime.Now;
                 db.Usuarios.Add(usuario);
                 db.SaveChanges();
@@ -60,6 +78,11 @@ namespace MMC2.Controllers
 
             ViewBag.Setor_Id = new SelectList(db.Setores, "Id", "Nome", usuario.Setor_Id);
             return View(usuario);
+        }
+
+        private string ErrorCodeToString(MembershipCreateStatus membershipCreateStatus)
+        {
+            throw new NotImplementedException();
         }
 
         //
