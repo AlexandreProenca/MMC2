@@ -14,40 +14,43 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#lnkNovo").button({ icons: { primary: "ui-icon-document" } });
+            $("#lnkPesquisar").button({ icons: { primary: "ui-icon-search" } });
         });
+        function setAguarde(dv) {
+            $("#" + dv).html("<img src='/images/ajaxP.gif'/ alt=''>&nbsp;Aguarde...");
+        }
+        function atualizarCliente() {
+            var nome = $('#txtCliente').val();
+            $.ajax(
+            {
+                type: 'GET',
+                url: '/Cliente/GridCliente/?nome='+nome,
+                dataType: 'html',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#gridCliente').html(data);
+                }
+            });
+        }
     </script>
 }
 
 <h2>Clientes</h2>
 
-<p>
-    @Html.ActionLink("Relatorio", "Relatorio")
-</p>
 
 <p>
     @Html.ActionLink("Criar Novo", "Create", null, new { id = "lnkNovo" })
 </p>
+<div style="float:left">
+<input id="txtCliente" type="text" />
+<a href="#" id="lnkPesquisar" onclick="atualizarCliente();setAguarde('aguarde')">Pesquisar</a></div>
+<div id="aguarde" style="float:left;"></div>
 
-<div id="gridContentClientes">
-@grid.GetHtml(
-    tableStyle: "gridTable",
-    headerStyle: "gridHead", 
-    footerStyle:"gridFooter",
-	rowStyle:"gridRow", 
-    alternatingRowStyle: "gridAltRow",
-    htmlAttributes: new { id = "grid-dash" },
-    columns: new [] {
-    grid.Column("Nome",header:"Cliente"),
-    grid.Column("Cnpj",header:"CNPJ"),
-    grid.Column("Email",header:"E-Mail"),
-    grid.Column("Site",header:"Site"),
-    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
-    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn")
-  
-
-})
-
-   
+<div id="gridCliente">
+    @{
+        Html.RenderPartial("GridCliente");
+    }   
 </div>
     
  @*grid.Column(header: "Check", style: "labelcolumn",

@@ -36,6 +36,12 @@ namespace MMC2.Controllers
             return View(cliente);
         }
 
+        public PartialViewResult GridCliente(string nome)
+        {
+            var clientes = (from a in db.Clientes where a.Ativo == true && a.Nome.Contains(nome) orderby a.Nome select a).ToList();
+            return PartialView(clientes);
+        }
+
         //public ActionResult GetClientes(string data)
         //{
         //    var clientes = (from a in db.Clientes where a.Ativo == true && a.Nome.Contains(data) orderby a.Nome select a).ToList();
@@ -51,12 +57,27 @@ namespace MMC2.Controllers
             return View();
         }
 
-        public ActionResult Relatorio()
+        public ActionResult Relatorio(int _id = 0)
         {
             LocalReport localReport = new LocalReport();
             localReport.ReportPath = Server.MapPath("~/Report/ReportRelatorioProjeto.rdlc");
-            //var obj = (from a in db.vw_relatorio_projeto where a.id)
-            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", db.Clientes);
+            var obj = (from a in db.vw_relatorio_projeto where a.projeto_id == _id select new { 
+                a.projeto_id,
+                a.projeto,
+                a.DescricaoProjeto,
+                a.cliente,
+                a.DtIniProjeto,
+                a.DtFimProjeto,
+                a.tarefa,
+                a.DescricaoTarefa,
+                a.tarefa_id,
+                a.colaborador,
+                a.status,
+                a.datalancamento,
+                a.qtdhoras,
+                a.DescricaoHistorico,
+                a.historico_id });
+            ReportDataSource reportDataSource = new ReportDataSource("DataSet1", obj);
             localReport.DataSources.Add(reportDataSource);
 
             string reportType = "PDF";
