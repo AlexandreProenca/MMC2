@@ -28,12 +28,12 @@
     </script>
 }
 
-<h2>Novo</h2>
+<h2>Cadastrar novo cliente</h2>
 
-<div id="tabs">
-    <ul>
+<div id="tabs" >
+   @* <ul>
         <li><a href="#tabs-1">Cadastrar Cliente</a></li>
-    </ul>
+    </ul>*@
     <div id="tabs-1">
         @using (Html.BeginForm())
         {
@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.Cliente.Nome)
+                                                @Html.LabelFor(model => model.Cliente.Nome,"*Nome de identificação")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.Cliente.Nome)
@@ -61,7 +61,7 @@
                                         </td>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.Cliente.Email)
+                                                @Html.LabelFor(model => model.Cliente.Email,"*Email de contato")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.Cliente.Email)
@@ -84,7 +84,7 @@
                                         </td>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.Cliente.Cnpj)
+                                                @Html.LabelFor(model => model.Cliente.Cnpj,"*CNPJ")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.Cliente.Cnpj)
@@ -93,7 +93,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <table style="padding: 10px;">
+                                @*<table style="padding: 10px;">
                                     <tr>
                                         <td>
                                             <div class="editor-label">
@@ -105,7 +105,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                </table>
+                                </table>*@
                             </td>
                         </tr>
                     </table>
@@ -116,7 +116,7 @@
                                     <tr>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.EnderecoNovo.Rua)
+                                                @Html.LabelFor(model => model.EnderecoNovo.Rua,"*Rua")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.EnderecoNovo.Rua)
@@ -125,7 +125,7 @@
                                         </td>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.EnderecoNovo.Numero)
+                                                @Html.LabelFor(model => model.EnderecoNovo.Numero,"*Numero")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.EnderecoNovo.Numero)
@@ -151,7 +151,7 @@
                                         </td>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.EnderecoNovo.CEP)
+                                                @Html.LabelFor(model => model.EnderecoNovo.CEP,"*CEP")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.EnderecoNovo.CEP)
@@ -211,7 +211,7 @@
                                     <tr>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.EnderecoNovo.Telefone1)
+                                                @Html.LabelFor(model => model.EnderecoNovo.Telefone1,"*Telefone de contato")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.EnderecoNovo.Telefone1)
@@ -221,7 +221,7 @@
                                         </td>
                                         <td>
                                             <div class="editor-label">
-                                                @Html.LabelFor(model => model.EnderecoNovo.Telefone2)
+                                                @Html.LabelFor(model => model.EnderecoNovo.Telefone2,"Telefone Celular")
                                             </div>
                                             <div class="editor-field">
                                                 @Html.EditorFor(model => model.EnderecoNovo.Telefone2)
@@ -242,7 +242,7 @@
         }
 
         <div style="clear: both;">
-            @Html.ActionLink("Voltar para a lista", "Index", null, new { id = "lnkVoltar" })
+            @Html.ActionLink("Cancelar", "Index", null, new { id = "lnkVoltar" })
         </div>
     </div>
 </div>

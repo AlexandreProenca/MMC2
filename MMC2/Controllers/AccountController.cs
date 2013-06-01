@@ -63,7 +63,7 @@ namespace MMC2.Controllers
                 }
                 else if (obj.TipoUsuario == "Gerente")
                 {
-                    return RedirectToAction("Index", "Projeto");
+                    return RedirectToAction("Index", "Dashbord");
                 }
                 else
                 {

@@ -9,6 +9,8 @@ using MMC2.Models;
 
 namespace MMC2.Controllers
 {
+    [Authorize]
+    [MMC2.Filters.InitializeSimpleMembership]
     public class RecursoController : Controller
     {
         private MHCAEntities db = new MHCAEntities();
@@ -28,16 +30,27 @@ namespace MMC2.Controllers
         }
 
         //
-        // GET: /Recurso/Details/
+        // GET: /action para amarrar o usuario com a tarefa
 
-        public ActionResult Details(int id = 0)
+        public ActionResult DefineUsuario(int id = 0)
         {
-            Tarefa tarefa = db.Tarefas.Find(id);
-            if (tarefa == null)
+
+            Skill skill = db.Skills.Find(id);
+
+            Tarefa tar = (from a in db.Tarefas
+                          orderby a.Id descending
+                          select a).FirstOrDefault();
+
+            if (skill == null || tar == null)
             {
                 return HttpNotFound();
             }
-            return View(tarefa);
+
+            tar.Usuario = skill.Usuario;
+            db.Entry(tar).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("../Tarefa");
         }
 
         //
@@ -55,25 +68,25 @@ namespace MMC2.Controllers
         //
         // POST: /Recurso/Create
 
-        [HttpPost]
-        public ActionResult Create (int id = 0)
-        {
-              
-                //Usuario user = db.Usuarios.Find((int)TempData["id_user"]);
-                Usuario user = db.Usuarios.Find(id);
-               
-                //int id = TempData["id_tarefa"] = tarefa.Id;
-                //Usuario usuario = db.Usuario.Find(usuario_id);
-               // Tarefa tarefa = db.Tarefas.Find(id);
-                Tarefa tar = (from a in db.Tarefas select a).FirstOrDefault();
-                
-                tar.Usuario = user;// amarra o usuario escolhido com a tarefa criada
-                db.Entry(tar).State = EntityState.Modified;
-                db.SaveChanges();
-                return View(tar);
-           
-         
-        }
+        //[HttpPost]
+        //public ActionResult Create (int id = 0)
+        //{
+
+        //        //Usuario user = db.Usuarios.Find((int)TempData["id_user"]);
+        //        Usuario user = db.Usuarios.Find(id);
+
+        //        //int id = TempData["id_tarefa"] = tarefa.Id;
+        //        //Usuario usuario = db.Usuario.Find(usuario_id);
+        //       // Tarefa tarefa = db.Tarefas.Find(id);
+        //        Tarefa tar = (from a in db.Tarefas select a).FirstOrDefault();
+
+        //        tar.Usuario = user;// amarra o usuario escolhido com a tarefa criada
+        //        db.Entry(tar).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return View(tar);
+
+
+        //}
 
         //
         // GET: /Recurso/Edit/5

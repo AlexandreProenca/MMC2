@@ -9,6 +9,8 @@ using MMC2.Models;
 
 namespace MMC2.Controllers
 {
+    [Authorize]
+    [MMC2.Filters.InitializeSimpleMembership]
     public class TipoSkillController : Controller
     {
         private MHCAEntities db = new MHCAEntities();

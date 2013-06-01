@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjetoController.cs" />
     <Compile Include="Controllers\RecursoController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TarefaController.cs" />
@@ -432,27 +433,27 @@
     <Content Include="Views\TipoSkill\Create.cshtml" />
     <Content Include="Views\TipoSkill\Edit.cshtml" />
     <Content Include="Views\TipoSkill\Delete.cshtml" />
-    <Content Include="Views\Projeto\Index.cshtml" />
-    <Content Include="Views\Projeto\Details.cshtml" />
-    <Content Include="Views\Projeto\Create.cshtml" />
-    <Content Include="Views\Projeto\Edit.cshtml" />
-    <Content Include="Views\Projeto\Delete.cshtml" />
-    <Content Include="Views\Tarefa\Index.cshtml" />
-    <Content Include="Views\Tarefa\Details.cshtml" />
-    <Content Include="Views\Tarefa\Create.cshtml" />
-    <Content Include="Views\Tarefa\Edit.cshtml" />
-    <Content Include="Views\Tarefa\Delete.cshtml" />
-    <Content Include="Views\Dashbord\_Projetos.cshtml" />
+    <Content Include="Views\Relatorio\Index.cshtml" />
     <Content Include="Views\Dashbord\Index.cshtml" />
-    <Content Include="Views\Recurso\Index.cshtml" />
-    <Content Include="Views\Recurso\Details.cshtml" />
+    <Content Include="Views\Dashbord\_Historicos.cshtml" />
+    <Content Include="Views\Dashbord\_Projetos.cshtml" />
+    <Content Include="Views\Dashbord\_Tarefas.cshtml" />
+    <Content Include="Views\Projeto\Create.cshtml" />
+    <Content Include="Views\Projeto\Delete.cshtml" />
+    <Content Include="Views\Projeto\Details.cshtml" />
+    <Content Include="Views\Projeto\Edit.cshtml" />
+    <Content Include="Views\Projeto\Index.cshtml" />
     <Content Include="Views\Recurso\Create.cshtml" />
-    <Content Include="Views\Recurso\Edit.cshtml" />
     <Content Include="Views\Recurso\Delete.cshtml" />
+    <Content Include="Views\Recurso\Details.cshtml" />
+    <Content Include="Views\Recurso\Edit.cshtml" />
+    <Content Include="Views\Recurso\Index.cshtml" />
+    <Content Include="Views\Tarefa\Create.cshtml" />
+    <Content Include="Views\Tarefa\Delete.cshtml" />
+    <Content Include="Views\Tarefa\Details.cshtml" />
+    <Content Include="Views\Tarefa\Edit.cshtml" />
+    <Content Include="Views\Tarefa\Index.cshtml" />
     <Content Include="Views\Tarefa\Recurso.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Report\Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -460,6 +461,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report\ReportRelatorioProjeto.rdlc" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

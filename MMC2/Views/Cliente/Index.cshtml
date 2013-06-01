@@ -36,15 +36,19 @@
     </script>
 }
 
-<h2>Clientes</h2>
+<h2>Gerenciamento de Clientes</h2>
+<br />
+<br />
+<br />
 
-
+<div style="float:left">
 <p>
     @Html.ActionLink("Criar Novo", "Create", null, new { id = "lnkNovo" })
 </p>
-<div style="float:left">
+</div>
+<div style="float:right">
 <input id="txtCliente" type="text" />
-<a href="#" id="lnkPesquisar" onclick="atualizarCliente();setAguarde('aguarde')">Pesquisar</a></div>
+<a href="#" id="lnkPesquisar" onclick="atualizarCliente()">Pesquisar</a></div>
 <div id="aguarde" style="float:left;"></div>
 
 <div id="gridCliente">

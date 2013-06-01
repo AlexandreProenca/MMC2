@@ -9,6 +9,8 @@ using MMC2.Models;
 
 namespace MMC2.Controllers
 {
+    [Authorize]
+    [MMC2.Filters.InitializeSimpleMembership]
     public class TarefaController : Controller
     {
         private MHCAEntities db = new MHCAEntities();
@@ -55,7 +57,7 @@ namespace MMC2.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 //if((string)Session["-PAPEL"] == "Desenvolvedor")
                 //{
 
@@ -66,9 +68,9 @@ namespace MMC2.Controllers
                 tarefa.Porcentagem = 0;
                 db.Tarefas.Add(tarefa);
                 db.SaveChanges();
-               
-                TempData["habilidade"]  = tarefa.Habilidade_Id;
-                
+
+                TempData["habilidade"] = tarefa.Habilidade_Id;
+
                 return RedirectToAction("../Recurso");//preciso passa o objeto tarefa junto com tmpDATA
             }
 
@@ -109,8 +111,8 @@ namespace MMC2.Controllers
                 {
                     //recupero um obj do tipo skill para adicionar xp
                     Skill obj = (from a in db.Skills
-                               where a.Usuario_Id.Equals(tarefa.Usuario_Id)
-                               select a).FirstOrDefault();
+                                 where a.Usuario_Id.Equals(tarefa.Usuario_Id)
+                                 select a).FirstOrDefault();
                     //var obj = (from a in db.Skills
                     //           where a.TipoSkills_Id.Equals(tarefa.Habilidade_Id)
                     //           select a).FirstOrDefault();
@@ -119,7 +121,7 @@ namespace MMC2.Controllers
                     db.SaveChanges();
 
                     tarefa.Status_Id = 3; //tarefa finalizado
-                   
+
 
                 }
                 db.Entry(tarefa).State = EntityState.Modified;

@@ -6,32 +6,74 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Globalization;
+using System.Web.Security;
 
 namespace MMC2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Tarefa
     {
         public Tarefa()
         {
             this.Historicos = new HashSet<Historico>();
         }
-    
+
         public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Nome de identificação")]
         public string Nome { get; set; }
+
+        [Required]
+        [Display(Name = "Descrição da tarefa")]
         public string Descricao { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Inicio")]
         public System.DateTime DataInicio { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Entrega")]
         public System.DateTime DataFinal { get; set; }
+
+
+        [Display(Name = "Porcentagem")]
         public Nullable<int> Porcentagem { get; set; }
+
+        [Required]
+        [Display(Name = "Status da tarefa")]
         public int Status_Id { get; set; }
+
+        [Required]
+        [Display(Name = "Projeto Pertencente")]
         public int Projeto_Id { get; set; }
+
+        [Required]
+        [Display(Name = "Prioridade")]
         public string Prioridade { get; set; }
+
+        [Required]
+        [Display(Name = "Executor da tarefa")]
         public int Usuario_Id { get; set; }
+
+        [Required]
+        [Display(Name = "Tempo estimado")]
         public Nullable<double> TempoEstimado { get; set; }
-        public int Habilidade_Id { get; set; }
-    
+
+        [Required]
+        [Display(Name = "Hbilidade requerida")]
+        public Nullable<int> Habilidade_Id { get; set; }
+
         public virtual ICollection<Historico> Historicos { get; set; }
         public virtual Projeto Projeto { get; set; }
         public virtual Status Status { get; set; }

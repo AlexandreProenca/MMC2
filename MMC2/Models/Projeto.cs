@@ -7,29 +7,67 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Globalization;
+using System.Web.Security;
+
 namespace MMC2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Projeto
     {
         public Projeto()
         {
             this.Tarefas = new HashSet<Tarefa>();
         }
-    
+
         public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Nome de identificação")]
         public string Nome { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Inicio")]
         public System.DateTime DataInicio { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Entrega estimada")]
         public System.DateTime DataFinal { get; set; }
+
+        [Display(Name = "Descriçao")]
         public string Descricao { get; set; }
+
+        [Required]
+        [Display(Name = "Nome de identificação")]
         public int Status_Id { get; set; }
+
+        [Required]
+        [Display(Name = "Nome de identificação")]
         public int Cliente_Id { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Entrega de Criaçao")]
         public System.DateTime DataHora { get; set; }
+
+        [Required]
+        [DataType(DataType.Currency)]
+        [Display(Name = "Entrega estimada")]
         public decimal Valor { get; set; }
+
+        [Required]
+        [Display(Name = "Gerente do Projeto")]
         public int Gerente_Id { get; set; }
-    
+
         public virtual Cliente Cliente { get; set; }
         public virtual Status Status { get; set; }
         public virtual Usuario Usuario { get; set; }
