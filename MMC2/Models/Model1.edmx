@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="mhcaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="mhcaModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="mhcaModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Enderecos" EntityType="mhcaModel.Store.Enderecos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Historicos" EntityType="mhcaModel.Store.Historicos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Projetos" EntityType="mhcaModel.Store.Projetos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Setores" EntityType="mhcaModel.Store.Setores" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Skills" EntityType="mhcaModel.Store.Skills" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="mhcaModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tarefas" EntityType="mhcaModel.Store.Tarefas" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TipoSkills" EntityType="mhcaModel.Store.TipoSkills" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Usuarios" EntityType="mhcaModel.Store.Usuarios" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="vw_relatorio_projeto" EntityType="mhcaModel.Store.vw_relatorio_projeto" store:Type="Views" store:Schema="dbo" store:Name="vw_relatorio_projeto">
+            <DefiningQuery>SELECT 
+      [vw_relatorio_projeto].[projeto_id] AS [projeto_id], 
+      [vw_relatorio_projeto].[projeto] AS [projeto], 
+      [vw_relatorio_projeto].[Cnpj] AS [Cnpj], 
+      [vw_relatorio_projeto].[cliente] AS [cliente], 
+      [vw_relatorio_projeto].[DescricaoProjeto] AS [DescricaoProjeto], 
+      [vw_relatorio_projeto].[DtIniProjeto] AS [DtIniProjeto], 
+      [vw_relatorio_projeto].[DtFimProjeto] AS [DtFimProjeto], 
+      [vw_relatorio_projeto].[valor] AS [valor], 
+      [vw_relatorio_projeto].[tarefa_id] AS [tarefa_id], 
+      [vw_relatorio_projeto].[tarefa] AS [tarefa], 
+      [vw_relatorio_projeto].[DescricaoTarefa] AS [DescricaoTarefa], 
+      [vw_relatorio_projeto].[colaborador] AS [colaborador], 
+      [vw_relatorio_projeto].[status] AS [status], 
+      [vw_relatorio_projeto].[DtIniTarefa] AS [DtIniTarefa], 
+      [vw_relatorio_projeto].[DtFimTarefa] AS [DtFimTarefa], 
+      [vw_relatorio_projeto].[tempoestimado] AS [tempoestimado], 
+      [vw_relatorio_projeto].[prioridade] AS [prioridade], 
+      [vw_relatorio_projeto].[historico_id] AS [historico_id], 
+      [vw_relatorio_projeto].[datalancamento] AS [datalancamento], 
+      [vw_relatorio_projeto].[qtdhoras] AS [qtdhoras], 
+      [vw_relatorio_projeto].[DescricaoHistorico] AS [DescricaoHistorico]
+      FROM [dbo].[vw_relatorio_projeto] AS [vw_relatorio_projeto]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Enderecos_Clientes" Association="mhcaModel.Store.FK_Enderecos_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Enderecos" EntitySet="Enderecos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historico_tarefa" Association="mhcaModel.Store.FK_historico_tarefa">
+            <End Role="Tarefas" EntitySet="Tarefas" />
+            <End Role="Historicos" EntitySet="Historicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historicos_Usuarios" Association="mhcaModel.Store.FK_Historicos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Historicos" EntitySet="Historicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_projeto_cliente" Association="mhcaModel.Store.FK_projeto_cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Projetos" EntitySet="Projetos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_projeto_status" Association="mhcaModel.Store.FK_projeto_status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Projetos" EntitySet="Projetos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projetos_Usuarios" Association="mhcaModel.Store.FK_Projetos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Projetos" EntitySet="Projetos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skill_usuario" Association="mhcaModel.Store.FK_skill_usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skills_TipoSkills" Association="mhcaModel.Store.FK_Skills_TipoSkills">
+            <End Role="TipoSkills" EntitySet="TipoSkills" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tarefa_projeto" Association="mhcaModel.Store.FK_tarefa_projeto">
+            <End Role="Projetos" EntitySet="Projetos" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tarefa_status" Association="mhcaModel.Store.FK_tarefa_status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefas_TipoSkills" Association="mhcaModel.Store.FK_Tarefas_TipoSkills">
+            <End Role="TipoSkills" EntitySet="TipoSkills" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefas_Usuarios" Association="mhcaModel.Store.FK_Tarefas_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_setor" Association="mhcaModel.Store.FK_usuario_setor">
+            <End Role="Setores" EntitySet="Setores" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Site" Type="varchar" MaxLength="50" />
+          <Property Name="Cnpj" Type="varchar" MaxLength="50" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Enderecos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Rua" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="Bairro" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CEP" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Cidade" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="Complemento" Type="varchar" MaxLength="50" />
+          <Property Name="Telefone1" Type="varchar" MaxLength="14" />
+          <Property Name="Telefone2" Type="varchar" MaxLength="14" />
+          <Property Name="Cliente_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Historicos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="QtdHoras" Type="float" Nullable="false" />
+          <Property Name="DataLancamento" Type="datetime" Nullable="false" />
+          <Property Name="Descrição" Type="text" Nullable="false" />
+          <Property Name="Tarefa_Id" Type="int" Nullable="false" />
+          <Property Name="Usuario_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projetos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DataInicio" Type="datetime2" Nullable="false" />
+          <Property Name="DataFinal" Type="datetime2" Nullable="false" />
+          <Property Name="Descricao" Type="text" />
+          <Property Name="Status_Id" Type="int" Nullable="false" />
+          <Property Name="Cliente_Id" Type="int" Nullable="false" />
+          <Property Name="DataHora" Type="datetime2" Nullable="false" />
+          <Property Name="Valor" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="Gerente_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nivel" Type="int" Nullable="false" />
+          <Property Name="Usuario_Id" Type="int" Nullable="false" />
+          <Property Name="TipoSkills_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tarefas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Descricao" Type="text" Nullable="false" />
+          <Property Name="DataInicio" Type="datetime2" Nullable="false" />
+          <Property Name="DataFinal" Type="datetime2" Nullable="false" />
+          <Property Name="Porcentagem" Type="int" />
+          <Property Name="Status_Id" Type="int" Nullable="false" />
+          <Property Name="Projeto_Id" Type="int" Nullable="false" />
+          <Property Name="Prioridade" Type="varchar" MaxLength="50" />
+          <Property Name="Usuario_Id" Type="int" Nullable="false" />
+          <Property Name="TempoEstimado" Type="float" />
+          <Property Name="Habilidade_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoSkills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" />
+          <Property Name="Senha" Type="varchar" MaxLength="50" />
+          <Property Name="Setor_Id" Type="int" />
+          <Property Name="DataHora" Type="datetime" />
+          <Property Name="Ativo" Type="bit" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="TipoUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="CustoHora" Type="decimal" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'mhca.dbo.vw_relatorio_projeto' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vw_relatorio_projeto">
+          <Key>
+            <PropertyRef Name="projeto_id" />
+            <PropertyRef Name="projeto" />
+            <PropertyRef Name="DtIniProjeto" />
+            <PropertyRef Name="DtFimProjeto" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="projeto_id" Type="int" Nullable="false" />
+          <Property Name="projeto" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Cnpj" Type="varchar" MaxLength="50" />
+          <Property Name="cliente" Type="varchar" MaxLength="50" />
+          <Property Name="DescricaoProjeto" Type="text" />
+          <Property Name="DtIniProjeto" Type="datetime2" Nullable="false" />
+          <Property Name="DtFimProjeto" Type="datetime2" Nullable="false" />
+          <Property Name="valor" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="tarefa_id" Type="int" />
+          <Property Name="tarefa" Type="varchar" MaxLength="50" />
+          <Property Name="DescricaoTarefa" Type="text" />
+          <Property Name="colaborador" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="DtIniTarefa" Type="datetime2" />
+          <Property Name="DtFimTarefa" Type="datetime2" />
+          <Property Name="tempoestimado" Type="float" />
+          <Property Name="prioridade" Type="varchar" MaxLength="50" />
+          <Property Name="historico_id" Type="int" />
+          <Property Name="datalancamento" Type="datetime" />
+          <Property Name="qtdhoras" Type="float" />
+          <Property Name="DescricaoHistorico" Type="text" />
+        </EntityType>
+        <Association Name="FK_Enderecos_Clientes">
+          <End Role="Clientes" Type="mhcaModel.Store.Clientes" Multiplicity="0..1" />
+          <End Role="Enderecos" Type="mhcaModel.Store.Enderecos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enderecos">
+              <PropertyRef Name="Cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historico_tarefa">
+          <End Role="Tarefas" Type="mhcaModel.Store.Tarefas" Multiplicity="1" />
+          <End Role="Historicos" Type="mhcaModel.Store.Historicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarefas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Historicos">
+              <PropertyRef Name="Tarefa_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historicos_Usuarios">
+          <End Role="Usuarios" Type="mhcaModel.Store.Usuarios" Multiplicity="1" />
+          <End Role="Historicos" Type="mhcaModel.Store.Historicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Historicos">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_projeto_cliente">
+          <End Role="Clientes" Type="mhcaModel.Store.Clientes" Multiplicity="1" />
+          <End Role="Projetos" Type="mhcaModel.Store.Projetos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projetos">
+              <PropertyRef Name="Cliente_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_projeto_status">
+          <End Role="Status" Type="mhcaModel.Store.Status" Multiplicity="1" />
+          <End Role="Projetos" Type="mhcaModel.Store.Projetos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projetos">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projetos_Usuarios">
+          <End Role="Usuarios" Type="mhcaModel.Store.Usuarios" Multiplicity="1" />
+          <End Role="Projetos" Type="mhcaModel.Store.Projetos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projetos">
+              <PropertyRef Name="Gerente_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_skill_usuario">
+          <End Role="Usuarios" Type="mhcaModel.Store.Usuarios" Multiplicity="1" />
+          <End Role="Skills" Type="mhcaModel.Store.Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skills_TipoSkills">
+          <End Role="TipoSkills" Type="mhcaModel.Store.TipoSkills" Multiplicity="1" />
+          <End Role="Skills" Type="mhcaModel.Store.Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSkills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="TipoSkills_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tarefa_projeto">
+          <End Role="Projetos" Type="mhcaModel.Store.Projetos" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Store.Tarefas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projetos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Projeto_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tarefa_status">
+          <End Role="Status" Type="mhcaModel.Store.Status" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Store.Tarefas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefas_TipoSkills">
+          <End Role="TipoSkills" Type="mhcaModel.Store.TipoSkills" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Store.Tarefas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSkills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Habilidade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefas_Usuarios">
+          <End Role="Usuarios" Type="mhcaModel.Store.Usuarios" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Store.Tarefas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_setor">
+          <End Role="Setores" Type="mhcaModel.Store.Setores" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="mhcaModel.Store.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Setor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mhcaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MHCAEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="mhcaModel.Cliente" />
+          <EntitySet Name="Enderecos" EntityType="mhcaModel.Endereco" />
+          <EntitySet Name="Historicos" EntityType="mhcaModel.Historico" />
+          <EntitySet Name="Projetos" EntityType="mhcaModel.Projeto" />
+          <EntitySet Name="Setores" EntityType="mhcaModel.Setore" />
+          <EntitySet Name="Skills" EntityType="mhcaModel.Skill" />
+          <EntitySet Name="Status" EntityType="mhcaModel.Status" />
+          <EntitySet Name="Tarefas" EntityType="mhcaModel.Tarefa" />
+          <EntitySet Name="TipoSkills" EntityType="mhcaModel.TipoSkill" />
+          <EntitySet Name="Usuarios" EntityType="mhcaModel.Usuario" />
+          <EntitySet Name="vw_relatorio_projeto" EntityType="mhcaModel.vw_relatorio_projeto" />
+          <AssociationSet Name="FK_Enderecos_Clientes" Association="mhcaModel.FK_Enderecos_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Enderecos" EntitySet="Enderecos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_projeto_cliente" Association="mhcaModel.FK_projeto_cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Projetos" EntitySet="Projetos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historico_tarefa" Association="mhcaModel.FK_historico_tarefa">
+            <End Role="Tarefas" EntitySet="Tarefas" />
+            <End Role="Historicos" EntitySet="Historicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historicos_Usuarios" Association="mhcaModel.FK_Historicos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Historicos" EntitySet="Historicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_projeto_status" Association="mhcaModel.FK_projeto_status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Projetos" EntitySet="Projetos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projetos_Usuarios" Association="mhcaModel.FK_Projetos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Projetos" EntitySet="Projetos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tarefa_projeto" Association="mhcaModel.FK_tarefa_projeto">
+            <End Role="Projetos" EntitySet="Projetos" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_setor" Association="mhcaModel.FK_usuario_setor">
+            <End Role="Setores" EntitySet="Setores" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skill_usuario" Association="mhcaModel.FK_skill_usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Skills_TipoSkills" Association="mhcaModel.FK_Skills_TipoSkills">
+            <End Role="TipoSkills" EntitySet="TipoSkills" />
+            <End Role="Skills" EntitySet="Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tarefa_status" Association="mhcaModel.FK_tarefa_status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefas_TipoSkills" Association="mhcaModel.FK_Tarefas_TipoSkills">
+            <End Role="TipoSkills" EntitySet="TipoSkills" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarefas_Usuarios" Association="mhcaModel.FK_Tarefas_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Tarefas" EntitySet="Tarefas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Site" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Cnpj" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Enderecos" Relationship="mhcaModel.FK_Enderecos_Clientes" FromRole="Clientes" ToRole="Enderecos" />
+          <NavigationProperty Name="Projetos" Relationship="mhcaModel.FK_projeto_cliente" FromRole="Clientes" ToRole="Projetos" />
+        </EntityType>
+        <EntityType Name="Endereco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Rua" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Cidade" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Complemento" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Telefone1" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="Telefone2" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+          <Property Name="Cliente_id" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="mhcaModel.FK_Enderecos_Clientes" FromRole="Enderecos" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="Historico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="QtdHoras" Type="Double" Nullable="false" />
+          <Property Name="DataLancamento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Descrição" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Tarefa_Id" Type="Int32" Nullable="false" />
+          <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tarefa" Relationship="mhcaModel.FK_historico_tarefa" FromRole="Historicos" ToRole="Tarefas" />
+          <NavigationProperty Name="Usuario" Relationship="mhcaModel.FK_Historicos_Usuarios" FromRole="Historicos" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Projeto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DataInicio" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DataFinal" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Status_Id" Type="Int32" Nullable="false" />
+          <Property Name="Cliente_Id" Type="Int32" Nullable="false" />
+          <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Gerente_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="mhcaModel.FK_projeto_cliente" FromRole="Projetos" ToRole="Clientes" />
+          <NavigationProperty Name="Status" Relationship="mhcaModel.FK_projeto_status" FromRole="Projetos" ToRole="Status" />
+          <NavigationProperty Name="Usuario" Relationship="mhcaModel.FK_Projetos_Usuarios" FromRole="Projetos" ToRole="Usuarios" />
+          <NavigationProperty Name="Tarefas" Relationship="mhcaModel.FK_tarefa_projeto" FromRole="Projetos" ToRole="Tarefas" />
+        </EntityType>
+        <EntityType Name="Setore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Usuarios" Relationship="mhcaModel.FK_usuario_setor" FromRole="Setores" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nivel" Type="Int32" Nullable="false" />
+          <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
+          <Property Name="TipoSkills_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="mhcaModel.FK_skill_usuario" FromRole="Skills" ToRole="Usuarios" />
+          <NavigationProperty Name="TipoSkill" Relationship="mhcaModel.FK_Skills_TipoSkills" FromRole="Skills" ToRole="TipoSkills" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Projetos" Relationship="mhcaModel.FK_projeto_status" FromRole="Status" ToRole="Projetos" />
+          <NavigationProperty Name="Tarefas" Relationship="mhcaModel.FK_tarefa_status" FromRole="Status" ToRole="Tarefas" />
+        </EntityType>
+        <EntityType Name="Tarefa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DataInicio" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DataFinal" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Porcentagem" Type="Int32" />
+          <Property Name="Status_Id" Type="Int32" Nullable="false" />
+          <Property Name="Projeto_Id" Type="Int32" Nullable="false" />
+          <Property Name="Prioridade" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
+          <Property Name="TempoEstimado" Type="Double" />
+          <Property Name="Habilidade_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Historicos" Relationship="mhcaModel.FK_historico_tarefa" FromRole="Tarefas" ToRole="Historicos" />
+          <NavigationProperty Name="Projeto" Relationship="mhcaModel.FK_tarefa_projeto" FromRole="Tarefas" ToRole="Projetos" />
+          <NavigationProperty Name="Status" Relationship="mhcaModel.FK_tarefa_status" FromRole="Tarefas" ToRole="Status" />
+          <NavigationProperty Name="TipoSkill" Relationship="mhcaModel.FK_Tarefas_TipoSkills" FromRole="Tarefas" ToRole="TipoSkills" />
+          <NavigationProperty Name="Usuario" Relationship="mhcaModel.FK_Tarefas_Usuarios" FromRole="Tarefas" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="TipoSkill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Skills" Relationship="mhcaModel.FK_Skills_TipoSkills" FromRole="TipoSkills" ToRole="Skills" />
+          <NavigationProperty Name="Tarefas" Relationship="mhcaModel.FK_Tarefas_TipoSkills" FromRole="TipoSkills" ToRole="Tarefas" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Senha" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Setor_Id" Type="Int32" />
+          <Property Name="DataHora" Type="DateTime" Precision="3" />
+          <Property Name="Ativo" Type="Boolean" />
+          <Property Name="Email" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="TipoUsuario" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CustoHora" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Historicos" Relationship="mhcaModel.FK_Historicos_Usuarios" FromRole="Usuarios" ToRole="Historicos" />
+          <NavigationProperty Name="Projetos" Relationship="mhcaModel.FK_Projetos_Usuarios" FromRole="Usuarios" ToRole="Projetos" />
+          <NavigationProperty Name="Setore" Relationship="mhcaModel.FK_usuario_setor" FromRole="Usuarios" ToRole="Setores" />
+          <NavigationProperty Name="Skills" Relationship="mhcaModel.FK_skill_usuario" FromRole="Usuarios" ToRole="Skills" />
+          <NavigationProperty Name="Tarefas" Relationship="mhcaModel.FK_Tarefas_Usuarios" FromRole="Usuarios" ToRole="Tarefas" />
+        </EntityType>
+        <EntityType Name="vw_relatorio_projeto">
+          <Key>
+            <PropertyRef Name="projeto_id" />
+            <PropertyRef Name="projeto" />
+            <PropertyRef Name="DtIniProjeto" />
+            <PropertyRef Name="DtFimProjeto" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="projeto_id" Type="Int32" Nullable="false" />
+          <Property Name="projeto" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Cnpj" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="cliente" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DescricaoProjeto" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DtIniProjeto" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DtFimProjeto" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="tarefa_id" Type="Int32" />
+          <Property Name="tarefa" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DescricaoTarefa" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="colaborador" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DtIniTarefa" Type="DateTime" Precision="7" />
+          <Property Name="DtFimTarefa" Type="DateTime" Precision="7" />
+          <Property Name="tempoestimado" Type="Double" />
+          <Property Name="prioridade" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="historico_id" Type="Int32" />
+          <Property Name="datalancamento" Type="DateTime" Precision="3" />
+          <Property Name="qtdhoras" Type="Double" />
+          <Property Name="DescricaoHistorico" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Enderecos_Clientes">
+          <End Role="Clientes" Type="mhcaModel.Cliente" Multiplicity="0..1" />
+          <End Role="Enderecos" Type="mhcaModel.Endereco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Enderecos">
+              <PropertyRef Name="Cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_projeto_cliente">
+          <End Role="Clientes" Type="mhcaModel.Cliente" Multiplicity="1" />
+          <End Role="Projetos" Type="mhcaModel.Projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projetos">
+              <PropertyRef Name="Cliente_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historico_tarefa">
+          <End Role="Tarefas" Type="mhcaModel.Tarefa" Multiplicity="1" />
+          <End Role="Historicos" Type="mhcaModel.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarefas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Historicos">
+              <PropertyRef Name="Tarefa_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historicos_Usuarios">
+          <End Role="Usuarios" Type="mhcaModel.Usuario" Multiplicity="1" />
+          <End Role="Historicos" Type="mhcaModel.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Historicos">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_projeto_status">
+          <End Role="Status" Type="mhcaModel.Status" Multiplicity="1" />
+          <End Role="Projetos" Type="mhcaModel.Projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projetos">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projetos_Usuarios">
+          <End Role="Usuarios" Type="mhcaModel.Usuario" Multiplicity="1" />
+          <End Role="Projetos" Type="mhcaModel.Projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Projetos">
+              <PropertyRef Name="Gerente_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tarefa_projeto">
+          <End Role="Projetos" Type="mhcaModel.Projeto" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projetos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Projeto_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_setor">
+          <End Role="Setores" Type="mhcaModel.Setore" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="mhcaModel.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setores">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Setor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_skill_usuario">
+          <End Role="Usuarios" Type="mhcaModel.Usuario" Multiplicity="1" />
+          <End Role="Skills" Type="mhcaModel.Skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Skills_TipoSkills">
+          <End Role="TipoSkills" Type="mhcaModel.TipoSkill" Multiplicity="1" />
+          <End Role="Skills" Type="mhcaModel.Skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSkills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Skills">
+              <PropertyRef Name="TipoSkills_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tarefa_status">
+          <End Role="Status" Type="mhcaModel.Status" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefas_TipoSkills">
+          <End Role="TipoSkills" Type="mhcaModel.TipoSkill" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSkills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Habilidade_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarefas_Usuarios">
+          <End Role="Usuarios" Type="mhcaModel.Usuario" Multiplicity="1" />
+          <End Role="Tarefas" Type="mhcaModel.Tarefa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarefas">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="mhcaModelStoreContainer" CdmEntityContainer="MHCAEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="mhcaModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enderecos">
+            <EntityTypeMapping TypeName="mhcaModel.Endereco">
+              <MappingFragment StoreEntitySet="Enderecos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rua" ColumnName="Rua" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Telefone1" ColumnName="Telefone1" />
+                <ScalarProperty Name="Telefone2" ColumnName="Telefone2" />
+                <ScalarProperty Name="Cliente_id" ColumnName="Cliente_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historicos">
+            <EntityTypeMapping TypeName="mhcaModel.Historico">
+              <MappingFragment StoreEntitySet="Historicos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QtdHoras" ColumnName="QtdHoras" />
+                <ScalarProperty Name="DataLancamento" ColumnName="DataLancamento" />
+                <ScalarProperty Name="Descrição" ColumnName="Descrição" />
+                <ScalarProperty Name="Tarefa_Id" ColumnName="Tarefa_Id" />
+                <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projetos">
+            <EntityTypeMapping TypeName="mhcaModel.Projeto">
+              <MappingFragment StoreEntitySet="Projetos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="DataInicio" ColumnName="DataInicio" />
+                <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="Cliente_Id" ColumnName="Cliente_Id" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Gerente_Id" ColumnName="Gerente_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Setores">
+            <EntityTypeMapping TypeName="mhcaModel.Setore">
+              <MappingFragment StoreEntitySet="Setores">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="mhcaModel.Skill">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+                <ScalarProperty Name="TipoSkills_Id" ColumnName="TipoSkills_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="mhcaModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarefas">
+            <EntityTypeMapping TypeName="mhcaModel.Tarefa">
+              <MappingFragment StoreEntitySet="Tarefas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="DataInicio" ColumnName="DataInicio" />
+                <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+                <ScalarProperty Name="Porcentagem" ColumnName="Porcentagem" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="Projeto_Id" ColumnName="Projeto_Id" />
+                <ScalarProperty Name="Prioridade" ColumnName="Prioridade" />
+                <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+                <ScalarProperty Name="TempoEstimado" ColumnName="TempoEstimado" />
+                <ScalarProperty Name="Habilidade_Id" ColumnName="Habilidade_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoSkills">
+            <EntityTypeMapping TypeName="mhcaModel.TipoSkill">
+              <MappingFragment StoreEntitySet="TipoSkills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="mhcaModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Setor_Id" ColumnName="Setor_Id" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="CustoHora" ColumnName="CustoHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_relatorio_projeto">
+            <EntityTypeMapping TypeName="mhcaModel.vw_relatorio_projeto">
+              <MappingFragment StoreEntitySet="vw_relatorio_projeto">
+                <ScalarProperty Name="projeto_id" ColumnName="projeto_id" />
+                <ScalarProperty Name="projeto" ColumnName="projeto" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="DescricaoProjeto" ColumnName="DescricaoProjeto" />
+                <ScalarProperty Name="DtIniProjeto" ColumnName="DtIniProjeto" />
+                <ScalarProperty Name="DtFimProjeto" ColumnName="DtFimProjeto" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="tarefa_id" ColumnName="tarefa_id" />
+                <ScalarProperty Name="tarefa" ColumnName="tarefa" />
+                <ScalarProperty Name="DescricaoTarefa" ColumnName="DescricaoTarefa" />
+                <ScalarProperty Name="colaborador" ColumnName="colaborador" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="DtIniTarefa" ColumnName="DtIniTarefa" />
+                <ScalarProperty Name="DtFimTarefa" ColumnName="DtFimTarefa" />
+                <ScalarProperty Name="tempoestimado" ColumnName="tempoestimado" />
+                <ScalarProperty Name="prioridade" ColumnName="prioridade" />
+                <ScalarProperty Name="historico_id" ColumnName="historico_id" />
+                <ScalarProperty Name="datalancamento" ColumnName="datalancamento" />
+                <ScalarProperty Name="qtdhoras" ColumnName="qtdhoras" />
+                <ScalarProperty Name="DescricaoHistorico" ColumnName="DescricaoHistorico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

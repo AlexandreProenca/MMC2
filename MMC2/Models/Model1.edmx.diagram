@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="163e4b75b64748acb1d4b44a34d9aad3" Name="Diagram1">
+        <EntityTypeShape EntityType="mhcaModel.Cliente" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Endereco" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Historico" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Projeto" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Setore" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Skill" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Status" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Tarefa" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.TipoSkill" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.Usuario" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mhcaModel.vw_relatorio_projeto" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="mhcaModel.FK_Enderecos_Clientes" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_projeto_cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_historico_tarefa" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_Historicos_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_projeto_status" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_Projetos_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_tarefa_projeto" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_usuario_setor" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_skill_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_Skills_TipoSkills" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_tarefa_status" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_Tarefas_TipoSkills" ManuallyRouted="false" />
+        <AssociationConnector Association="mhcaModel.FK_Tarefas_Usuarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

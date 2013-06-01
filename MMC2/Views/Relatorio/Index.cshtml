@@ -1,0 +1,58 @@
+﻿@model MMC2.Models.MHCAEntities
+
+@{
+    ViewBag.Title = "Relatórios";
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ddlProjeto").change(function () {
+                var projetoId = $(this).val();
+                $.getJSON("../Relatorio/Index", { projetoid: projetoId },
+                       function (classesData) {
+                           var select = $("#ddlProjeto");
+                           select.empty();
+                           select.append($('<option/>', {
+                               value: 0,
+                               text: "Select um Projeto"
+                           }));
+                           $.each(classesData, function (index, itemData) {
+                               alert(classesData);
+                               alert(itemData);
+                               select.append($('<option/>', {
+                                   value: itemData.Value,
+                                   text: itemData.Text
+                               }));
+                           });
+                       });
+            });
+
+            $("#lnkGerar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+        });
+    </script>
+}
+
+
+
+<h2>Gerar Relatório</h2>
+
+@using (Html.BeginForm()){
+    @Html.ValidationSummary(true)
+    
+    <div class="editor-label">
+        Selecione um projeto
+    </div>
+    <div class="editor-field">
+        @Html.DropDownListFor(Model => Model.Projetos, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Projeto"),
+            "", new { id = "ddlProjeto" })
+    </div>
+    <p>
+        @Html.ActionLink("Relatorio", "Relatorio", new { _id = 6 }, new { id = "lnkGerar" })
+    </p>
+}
+
