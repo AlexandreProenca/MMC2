@@ -25,20 +25,71 @@ namespace MMC2.Controllers
             return View();
         }
 
-        [HttpPost]
+        //[HttpPost]
+        //public JsonResult GetAreaChartData()
+        //{
+          
+
+        //    var data = new[]
+        //        {
+        //            new {Name = "Status", Value = "Tarefa"},
+        //            new {Name = "Ativas", Value = 10},
+        //            new {Name = "Finalizadas", Value = 20},
+        //            new {Name = "Canceladas", Value = 25},
+        //            new {Name = "Em andamento", Value = 45},
+        //        };
+
+        //    return Json(data,JsonRequestBehavior.AllowGet);
+        //}
+
+        public JsonResult GetDataAssets()
+        {
+            List<object> data = new List<object>();
+            data.Add(new[]  { "Status", "Tarefa" });
+            data.Add(new[] { 1, 11 });
+            data.Add(new[] {2, 2 });
+            data.Add(new[] {3, 2 });
+             data.Add(new[] {4, 2});
+             data.Add(new[] { 5, 7});
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        
+       
+
         public JsonResult GetAreaChartData()
         {
-            List<string[]> data = new List<string[]>();
-            data.Add(new[] { "Tarefas", "Ativos", "Finalizados" });
-            data.Add(new[] { "janeiro", "45", "38" });
-            data.Add(new[] { "Fevereiro", "33", "15" });
-            data.Add(new[] { "Março", "34", "30" });
-            data.Add(new[] { "Abril", "33", "15" });
 
-            return this.Json(data);
+
+            string ativas = (from a in db.Tarefas where a.Status_Id == 2 select a).Count().ToString();
+            string impedida = (from a in db.Tarefas where a.Status_Id == 4 select a).Count().ToString();
+            string corrente = (from a in db.Tarefas where a.Status_Id == 5 select a).Count().ToString();
+
+            List<string[]> data = new List<string[]>();
+            data.Add(new[] { "Label", "Value" });
+            data.Add(new[] { "Impedidas", impedida });
+            data.Add(new[] { "Canceladas", "2" });
+            data.Add(new[] { "Ativas", ativas });
+            data.Add(new[] { "Em andamento", corrente });
+           
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
+        public JsonResult GetGauge()
+        {
+            //var obj = (string)(from a in db.Tarefas select a).Count();
+            string entrega = (from a in db.Tarefas where a.Porcentagem == 100 select a).Count().ToString();
+            String totalTarefas = (from a in db.Tarefas select a).Count().ToString();
+            string atrasadas = (from a in db.Tarefas where a.DataFinal < DateTime.Now select a).Count().ToString();
+
+            List<string[]> data = new List<string[]>();
+            data.Add(new[] { "", "Value" });
+            data.Add(new[] { "Finalizada", entrega });
+            data.Add(new[] { "Atrasadas", atrasadas });
+            data.Add(new[] { "Tarefas", totalTarefas });
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
         public PartialViewResult GridProjeto()
         {

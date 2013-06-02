@@ -16,7 +16,7 @@
     </script>
 }
 
-<h2>Projetos ativos</h2>
+<h2>Projeto corrente</h2>
 
 <div id="partial_p">
 @grid.GetHtml(
@@ -27,7 +27,7 @@
     alternatingRowStyle: "gridAltRow",
     htmlAttributes: new { id = "grid_projetos" },
     columns: new [] {
-    grid.Column("Nome",header:"Nome"),
+    grid.Column("Nome",header:"Nome",style: "stypro"),
     grid.Column("DataInicio",header:"Inicio",format:p=>p.DataInicio.ToShortDateString()),
     grid.Column("DataFinal",header:"Entrega",format:p=>p.DataFinal.ToShortDateString()),
  
@@ -35,8 +35,8 @@
     //grid.Column("Usuario.Nome",header:"Gerente"),
    
   
-    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
-    grid.Column("",header:"",format:@<text> <a href="@Url.Action("Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("../Projeto/Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("../Projeto/Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn"),
   
 })
 

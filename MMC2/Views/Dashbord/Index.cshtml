@@ -76,44 +76,109 @@
         }
 
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-              ['Status', 'Tarefas'],
-              ['Ativa', 11],
-              ['Finalizada', 2],
-              ['Aguadando', 2],
-              ['Cancelada', 2],
-              ['Em Andamento', 7]
-            ]);
 
-            var options = {
-                title: 'Status das Tarefas',
-                is3D: 'true',
-                backgroundColor: '#efeeef',
-                fontSize: '14'
-            };
+                $.ajax({
+                type: "GET",
+                url: "/Dashbord/GetAreaChartData/",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    
+                    var tdata = new google.visualization.DataTable();
+                    var rows = data.length;
+                    var cols = data[0].length;
+                 
+                    tdata.addColumn('string', data[0][0]);
+                    for (var i = 0; i < cols; i++) {
+                        tdata.addColumn('number', data[0][i]);
+                    }
 
-            var chart = new google.visualization.PieChart(document.getElementById('grafico_status'));
-            chart.draw(data, options);
+                    tdata.addRows(data.length);
+                    for (var i = 1; i < data.length; i++) {
+                        tdata.setCell(i, 0, data[i][0]);
+                        for (var j = 1; j < cols; j++) {
+                            var value = parseInt(data[i][j]);
+                            tdata.setCell(i, j, value);
+
+                        }
+                    }
+
+
+                    var options = {
+                        title: '',
+                        legend: { position: 'bottom' },
+                        chartArea: { height: '500',width: '500' },
+                        is3D: 'true',
+                        backgroundColor: '#efeeef',
+                        fontSize: '14'
+                    };
+
+                    //alert(tdata);
+                    var chart = new google.visualization.PieChart(document.getElementById('grafico_status'));
+                    chart.draw(tdata, options);
+                }
+        });
         }
 
-       
+        google.load('visualization', '1', { packages: ['gauge'] });
+        google.setOnLoadCallback(drawChart2);
+        function drawChart2() {
+
+            $.ajax({
+                type: "GET",
+                url: "/Dashbord/GetGauge/",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+
+                    var tdata = new google.visualization.DataTable();
+                    var rows = data.length;
+                    var cols = data[0].length;
+
+                    tdata.addColumn('string', data[0][0]);
+                    for (var i = 0; i < cols; i++) {
+                        tdata.addColumn('number', data[0][i]);
+                       
+                    }
+
+                    tdata.addRows(data.length);
+                    for (var i = 1; i < data.length; i++) {
+                        tdata.setCell(i, 0, data[i][0]);
+                        for (var j = 1; j < cols; j++) {
+                            var value = parseInt(data[i][j]);
+                            tdata.setCell(i, j, value);
+
+                        }
+                    }
+                    
+                    var options = {
+                        width: 450, height: 300,
+                        redFrom: 90, redTo: 100,
+                        yellowFrom: 75, yellowTo: 90,
+                        minorTicks: 5
+                    };
+
+                    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+                    chart.draw(tdata, options);
+                }
+            });
+        }
     </script>
 }
 
 <h1>Acompanhamento rápido</h1>
-
+<div style="float:right; margin:0px 165px 0px 0px">
+    <h2>Finalizadas&nbsp;&nbsp;&nbsp;&nbsp; Atrasadas  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total</h2>
+</div>
+<div style="float:left; margin:0px 0px 0px 80px">
+    <h2>Status das tarefas</h2>
+</div>
 <div id="grafico_status" style="float:left; margin:40px 0px 0px 0px; width: 390px; height: 300px;"></div>
+
+
+<div id="chart_div"  style="float:left;  margin:15px;"></div>
 <div id="gridProjetos" style="float:left;  margin:15px;"></div>
 <div id="gridHistoricos" style="float:left;  margin:15px;"></div>
 <div id="gridTarefas" style="float:left;  margin:15px;" ></div>
-  
- <table class="gridRow">
-      <tr  class="gridFooter">
-          <td><h3>Visualização de tarefas</h3></td>
-          </tr>
-     <tr>
-        <td>
-     <div id="chart_div" style="width: 900px; height: 200px;  margin:10px; float:left;"></div>
-        </td>
-     </tr>
-  </table>
+
+     

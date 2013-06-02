@@ -34,15 +34,18 @@
                             }
                             else if (Session["-PAPEL"].ToString() == "Gerente")
                             {
-                                
+                            
+                            <li>@Html.ActionLink("Dashbord", "Index", "Dashbord")</li>
                             <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
                             <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
                             <li>@Html.ActionLink("Tarefas", "Index", "Tarefa")</li>
                             <li>@Html.ActionLink("Historicos", "Index", "Historico")</li>
                             <li>@Html.ActionLink("Atribuir habilidades", "Index", "Skill")</li>
+                            
                             }
                             else if (Session["-PAPEL"].ToString() == "Administrador")
                             {
+                                    <li>@Html.ActionLink("Dashbord", "Index", "Dashbord")</li>    
                                     <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
                                     <li>@Html.ActionLink("Históricos", "Index", "Historico")</li>
                                     <li>@Html.ActionLink("Projetos", "Index", "Projeto")</li>
