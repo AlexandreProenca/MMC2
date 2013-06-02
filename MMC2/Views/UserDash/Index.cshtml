@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            atualizarProjeto();
+            atualizarTarefa();
+            atualizarHistorico();
+           
+            
+
+        });
+        
+       
+        google.load("visualization", "1", { packages: ["corechart"] });      
+        google.setOnLoadCallback(drawChart);
+      
+
+        function setAguarde(dv) {
+            $("#" + dv).html("<img src='/images/ajaxP.gif'/ alt=''>&nbsp;Aguarde...");
+        }
+
+        function atualizarProjeto() {
+                    
+                $.ajax(
+                {
+                    type: 'GET',
+                    url: '/Dashbord/GridProjeto/',
+                    dataType: 'html',
+                    cache: false,
+                   async: true,
+                   success: function (data) {
+                        $('#gridProjetos').html(data);
+                    }
+                });
+        }
+
+        function atualizarTarefa() {
+
+            $.ajax(
+            {
+                type: 'GET',
+                url: '/Dashbord/GridTarefa/',
+                dataType: 'html',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#gridTarefas').html(data);
+                }
+            });
+        }
+
+        function atualizarHistorico() {
+
+            $.ajax(
+            {
+                type: 'GET',
+                url: '/Dashbord/GridHistorico/',
+                dataType: 'html',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#gridHistoricos').html(data);
+                }
+            });
+        }
+
+        function drawChart() {
+
+                $.ajax({
+                type: "GET",
+                url: "/Dashbord/GetAreaChartData/",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    
+                    var tdata = new google.visualization.DataTable();
+                    var rows = data.length;
+                    var cols = data[0].length;
+                 
+                    tdata.addColumn('string', data[0][0]);
+                    for (var i = 0; i < cols; i++) {
+                        tdata.addColumn('number', data[0][i]);
+                    }
+
+                    tdata.addRows(data.length);
+                    for (var i = 1; i < data.length; i++) {
+                        tdata.setCell(i, 0, data[i][0]);
+                        for (var j = 1; j < cols; j++) {
+                            var value = parseInt(data[i][j]);
+                            tdata.setCell(i, j, value);
+
+                        }
+                    }
+
+
+                    var options = {
+                        title: '',
+                        legend: { position: 'bottom' },
+                        chartArea: { height: '500',width: '500' },
+                        is3D: 'true',
+                        backgroundColor: '#efeeef',
+                        fontSize: '14'
+                    };
+
+                    //alert(tdata);
+                    var chart = new google.visualization.PieChart(document.getElementById('grafico_status'));
+                    chart.draw(tdata, options);
+                }
+        });
+        }
+
+        google.load('visualization', '1', { packages: ['gauge'] });
+        google.setOnLoadCallback(drawChart2);
+        function drawChart2() {
+
+            $.ajax({
+                type: "GET",
+                url: "/Dashbord/GetGauge/",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+
+                    var tdata = new google.visualization.DataTable();
+                    var rows = data.length;
+                    var cols = data[0].length;
+
+                    tdata.addColumn('string', data[0][0]);
+                    for (var i = 0; i < cols; i++) {
+                        tdata.addColumn('number', data[0][i]);
+                       
+                    }
+
+                    tdata.addRows(data.length);
+                    for (var i = 1; i < data.length; i++) {
+                        tdata.setCell(i, 0, data[i][0]);
+                        for (var j = 1; j < cols; j++) {
+                            var value = parseInt(data[i][j]);
+                            tdata.setCell(i, j, value);
+
+                        }
+                    }
+                    
+                    var options = {
+                        width: 450, height: 300,
+                        redFrom: 90, redTo: 100,
+                        yellowFrom: 75, yellowTo: 90,
+                        minorTicks: 5
+                    };
+
+                    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+                    chart.draw(tdata, options);
+                }
+            });
+        }
+    </script>
+}
+
+<h1>Lancamentos de historicos em tarefas</h1>
+<div style="float:right; margin:0px 165px 0px 0px">
+    <h2>Finalizadas&nbsp;&nbsp;&nbsp;&nbsp; Atrasadas  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total</h2>
+</div>
+<div style="float:left; margin:0px 0px 0px 80px">
+    <h2>Status das tarefas</h2>
+</div>
+@*<div id="grafico_status" style="float:left; margin:40px 0px 0px 0px; width: 390px; height: 300px;"></div>*@
+
+
+<div id="chart_div"  style="float:left;  margin:15px;"></div>
+@*<div id="gridProjetos" style="float:left;  margin:15px;"></div>*@
+
+<div id="gridTarefas" style="float:left;  margin:15px;" ></div>
+<div id="gridHistoricos" style="float:left;  margin:15px;"></div>
+
+     
