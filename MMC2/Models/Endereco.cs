@@ -28,7 +28,7 @@ namespace MMC2.Models
         public string Rua { get; set; }
 
         [Required]
-        [Display(Name = "Numero")]
+        [Display(Name = "Número")]
         public int Numero { get; set; }
         
         public string Bairro { get; set; }

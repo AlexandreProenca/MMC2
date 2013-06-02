@@ -47,7 +47,7 @@ namespace MMC2.Models
         public string Cnpj { get; set; }
 
         [Required]
-        [Display(Name = "Data de criacao")]
+        [Display(Name = "Data de criação")]
         [DataType(DataType.Date)]
         public System.DateTime DataHora { get; set; }
 
