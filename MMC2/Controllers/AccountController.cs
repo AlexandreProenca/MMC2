@@ -90,6 +90,7 @@ namespace MMC2.Controllers
             Session["-USUARIO"] = null;
             Session["-PAPEL"] = null;
             Session["-USUARIO_NOME"] = null;
+            Session["-IDPROJETO"] = null;
 
             return RedirectToAction("Index", "Home");
         }
