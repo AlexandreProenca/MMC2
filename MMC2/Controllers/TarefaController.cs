@@ -111,7 +111,7 @@ namespace MMC2.Controllers
                 {
                     //recupero um obj do tipo skill para adicionar xp
                     Skill obj = (from a in db.Skills
-                                 where a.Usuario_Id == tarefa.Usuario_Id 
+                                 where a.Usuario_Id == tarefa.Usuario_Id && a.TipoSkills_Id == tarefa.Habilidade_Id
                                  select a).FirstOrDefault();
                     //var obj = (from a in db.Skills
                     //           where a.TipoSkills_Id.Equals(tarefa.Habilidade_Id)
