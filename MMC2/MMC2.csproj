@@ -180,7 +180,6 @@
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TarefaController.cs" />
     <Compile Include="Controllers\TipoSkillController.cs" />
-    <Compile Include="Controllers\UserDashController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -459,15 +458,11 @@
     <Content Include="Views\Tarefa\Edit.cshtml" />
     <Content Include="Views\Tarefa\Index.cshtml" />
     <Content Include="Views\Tarefa\Recurso.cshtml" />
-    <Content Include="Views\UserDash\_Historicos.cshtml" />
-    <Content Include="Views\UserDash\_Tarefas.cshtml" />
-    <Content Include="Views\UserDash\Index.cshtml" />
-    <Content Include="Views\UserDash\_FormHistorico.cshtml" />
-    <Content Include="Views\UserDash\AddTarefa.cshtml" />
     <Content Include="Views\Dashuser\Create.cshtml" />
     <Content Include="Views\Dashuser\_Historicos.cshtml" />
     <Content Include="Views\Dashuser\_Tarefas.cshtml" />
     <Content Include="Views\Dashbord\_TarefasConcuidas.cshtml" />
+    <Content Include="Views\Dashuser\_TarefasConcuidas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

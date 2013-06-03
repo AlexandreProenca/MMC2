@@ -12,7 +12,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-
+       
             $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
             $("#btnSalvar").button({
                 icons: {
@@ -23,18 +23,11 @@
 
             atualizarTarefa();
             atualizarHistorico();
+            atualizarTarefaConcuida();
            
         });
 
-
-        google.load("visualization", "1", { packages: ["corechart"] });
-        google.setOnLoadCallback(drawChart);
-
-
-        function setAguarde(dv) {
-            $("#" + dv).html("<img src='/images/ajaxP.gif'/ alt=''>&nbsp;Aguarde...");
-        }
-
+        
         function atualizarHistorico() {
 
             $.ajax(
@@ -65,97 +58,23 @@
             });
         }
 
-      
+        function atualizarTarefaConcuida() {
 
-        function drawChart() {
-
-            $.ajax({
-                type: "GET",
-                url: "/Dashuser/GetAreaChartData/",
-                dataType: "json",
+            $.ajax(
+            {
+                type: 'GET',
+                url: '/Dashuser/GridTarefaConcuida/',
+                dataType: 'html',
                 cache: false,
+                async: true,
                 success: function (data) {
-
-                    var tdata = new google.visualization.DataTable();
-                    var rows = data.length;
-                    var cols = data[0].length;
-
-                    tdata.addColumn('string', data[0][0]);
-                    for (var i = 0; i < cols; i++) {
-                        tdata.addColumn('number', data[0][i]);
-                    }
-
-                    tdata.addRows(data.length);
-                    for (var i = 1; i < data.length; i++) {
-                        tdata.setCell(i, 0, data[i][0]);
-                        for (var j = 1; j < cols; j++) {
-                            var value = parseInt(data[i][j]);
-                            tdata.setCell(i, j, value);
-
-                        }
-                    }
-
-
-                    var options = {
-                        title: '',
-                        legend: { position: 'bottom' },
-                        chartArea: { height: '500', width: '500' },
-                        is3D: 'true',
-                        backgroundColor: '#efeeef',
-                        fontSize: '14'
-                    };
-
-                    //alert(tdata);
-                    var chart = new google.visualization.PieChart(document.getElementById('grafico_status'));
-                    chart.draw(tdata, options);
+                    $('#gridTarefasConcuidas').html(data);
                 }
             });
         }
 
-        google.load('visualization', '1', { packages: ['gauge'] });
-        google.setOnLoadCallback(drawChart2);
-        function drawChart2() {
-
-            $.ajax({
-                type: "GET",
-                url: "/Dashuser/GetGauge/",
-                dataType: "json",
-                cache: false,
-                success: function (data) {
-
-                    var tdata = new google.visualization.DataTable();
-                    var rows = data.length;
-                    var cols = data[0].length;
-
-                    tdata.addColumn('string', data[0][0]);
-                    for (var i = 0; i < cols; i++) {
-                        tdata.addColumn('number', data[0][i]);
-
-                    }
-
-                    tdata.addRows(data.length);
-                    for (var i = 1; i < data.length; i++) {
-                        tdata.setCell(i, 0, data[i][0]);
-                        for (var j = 1; j < cols; j++) {
-                            var value = parseInt(data[i][j]);
-                            tdata.setCell(i, j, value);
-
-                        }
-                    }
-
-                    var options = {
-                        width: 450, height: 200,
-                        redFrom: 35, redTo: 50,
-                        yellowFrom: 25, yellowTo: 35,
-                        max: 50,
-                        minorTicks: 5
-                    };
-
-                    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-                    chart.draw(tdata, options);
-                }
-            });
-        }
+                
+       
     </script>
 }
 
@@ -179,7 +98,7 @@
                 @Html.LabelFor(model => model.DataLancamento)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.DataLancamento)
+                @Html.EditorFor(model => model.DataLancamento, new { @class = "datefield", type = "date"  })
                 @Html.ValidationMessageFor(model => model.DataLancamento)
             </div>
 
@@ -216,6 +135,8 @@
  
     }
 </div>
+<div id="chart_div" style="float:left;  margin:15px;" ></div>
 
 <div id="gridTarefas" style="float:left;  margin:15px;" ></div>
 <div id="gridHistoricos" style="float:left;  margin:15px;"></div>
+<div id="gridTarefasConcuidas" style="float:left;  margin:15px;" ></div>

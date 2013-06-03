@@ -61,6 +61,8 @@ namespace MMC2.Controllers
                 return RedirectToAction("Index");
             }
 
+
+
             ViewBag.Tarefa_Id = new SelectList(db.Tarefas, "Id", "Nome", historico.Tarefa_Id);
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome", historico.Usuario_Id);
             return View(historico);
@@ -79,6 +81,8 @@ namespace MMC2.Controllers
             ViewBag.Tarefa_Id = new SelectList(db.Tarefas, "Id", "Nome", historico.Tarefa_Id);
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome", historico.Usuario_Id);
             return View(historico);
+            
+            
         }
 
         //
@@ -91,7 +95,18 @@ namespace MMC2.Controllers
             {
                 db.Entry(historico).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                Usuario user = db.Usuarios.Find((int)Session["-USUARIO"]);
+
+                if (user.TipoUsuario == "Gerente" || user.TipoUsuario == "Administrador")
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    return RedirectToAction("../Dashuser/Create");
+                }
+                
             }
             ViewBag.Tarefa_Id = new SelectList(db.Tarefas, "Id", "Nome", historico.Tarefa_Id);
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome", historico.Usuario_Id);

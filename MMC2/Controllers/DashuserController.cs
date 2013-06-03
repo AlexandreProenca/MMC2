@@ -38,6 +38,14 @@ namespace MMC2.Controllers
             return PartialView("_Historicos", historicos);
         }
 
+        public PartialViewResult GridTarefaConcuida()
+        {
+            int usuario_id = Convert.ToInt32(Session["-USUARIO"]);
+           
+            var tarefas = (from a in db.Tarefas where a.Porcentagem == 100 && a.Usuario_Id == usuario_id orderby a.Nome select a).ToList();
+            return PartialView("_TarefasConcuidas", tarefas);
+        }
+
         public JsonResult GetGauge()
         {
             int usuario_id = Convert.ToInt32(Session["-USUARIO"]);

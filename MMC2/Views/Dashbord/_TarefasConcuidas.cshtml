@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Gerenciar Tarefas";
-    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "partial_t");
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "partial_concluida");
 }
 
 @section Scripts {
@@ -16,7 +16,7 @@
     </script>
 }
 <h2 style="color:green">Tarefas concluidas</h2>
-<div id="partial_t">
+<div id="partial_concluida">
 @grid.GetHtml(
     tableStyle: "gridTable",
     headerStyle: "gridHead", 
