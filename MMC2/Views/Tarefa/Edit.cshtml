@@ -142,6 +142,7 @@
             @Html.ValidationMessageFor(model => model.Habilidade_Id)
         </div>
 
+         
         <p>
              <input type="submit" value="Atualizar" id="btnSalvar" />
         </p>
@@ -152,5 +153,7 @@
 
 </div>
 <div>
-   @Html.ActionLink("Voltar para a Lista", "Index", null,  new { id = "lnkVoltar" })
+   @Html.ActionLink("Cancelar", "Index", null,  new { id = "lnkVoltar" })
+
+    
 </div>

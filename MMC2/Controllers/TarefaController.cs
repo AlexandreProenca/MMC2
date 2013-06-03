@@ -111,7 +111,7 @@ namespace MMC2.Controllers
                 {
                     //recupero um obj do tipo skill para adicionar xp
                     Skill obj = (from a in db.Skills
-                                 where a.Usuario_Id.Equals(tarefa.Usuario_Id)
+                                 where a.Usuario_Id == tarefa.Usuario_Id 
                                  select a).FirstOrDefault();
                     //var obj = (from a in db.Skills
                     //           where a.TipoSkills_Id.Equals(tarefa.Habilidade_Id)
@@ -126,7 +126,18 @@ namespace MMC2.Controllers
                 }
                 db.Entry(tarefa).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                Usuario user = db.Usuarios.Find((int)Session["-USUARIO"]);
+
+                if (user.TipoUsuario == "Gerente" || user.TipoUsuario == "Administrador")
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    return RedirectToAction("../Dashuser/Create");
+                }
             }
             ViewBag.Projeto_Id = new SelectList(db.Projetos, "Id", "Nome", tarefa.Projeto_Id);
             ViewBag.Status_Id = new SelectList(db.Status, "Id", "Nome", tarefa.Status_Id);

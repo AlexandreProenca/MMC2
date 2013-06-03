@@ -26,8 +26,13 @@ namespace MMC2.Controllers
             return View();
         }
 
-      
-       
+
+        public ActionResult DefineTarefa(int id = 0)
+        {
+            Tarefa tarefa = db.Tarefas.Find(id);
+
+            return View("AddTarefa",tarefa);
+        }
 
         public JsonResult GetAreaChartData()
         {
@@ -36,7 +41,7 @@ namespace MMC2.Controllers
 
             string ativas = (from a in db.Tarefas where a.Status_Id == 2 && a.Projeto_Id == projeto_id select a).Count().ToString();
             string impedida = (from a in db.Tarefas where a.Status_Id == 4 && a.Projeto_Id == projeto_id select a).Count().ToString();
-            string corrente = (from a in db.Tarefas where a.Status_Id == 5 && a.Projeto_Id == projeto_id  select a).Count().ToString();
+            string corrente = (from a in db.Tarefas where a.Status_Id == 5 && a.Projeto_Id == projeto_id select a).Count().ToString();
             string encerradas = (from a in db.Tarefas where a.Status_Id == 3 && a.Projeto_Id == projeto_id select a).Count().ToString();
 
             List<string[]> data = new List<string[]>();
@@ -45,67 +50,88 @@ namespace MMC2.Controllers
             data.Add(new[] { "Finalizadas", encerradas });
             data.Add(new[] { "Ativas", ativas });
             data.Add(new[] { "Em andamento", corrente });
-           
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
         public JsonResult GetGauge()
         {
-            int projeto_id = Convert.ToInt32(Session["-IDPROJETO"]);
+            int usuario_id = Convert.ToInt32(Session["-USUARIO"]);
 
-            string entrega = (from a in db.Tarefas where a.Porcentagem == 100 && a.Projeto_Id == projeto_id select a).Count().ToString();
-            string totalTarefas = (from a in db.Tarefas where a.Projeto_Id == projeto_id select a).Count().ToString();
-            string atrasadas = (from a in db.Tarefas where a.DataFinal < DateTime.Now && a.Projeto_Id == projeto_id select a).Count().ToString();
+            string entrega = (from a in db.Tarefas where a.Porcentagem == 100 && a.Usuario_Id == usuario_id select a).Count().ToString();
+            string ativas = (from a in db.Tarefas where a.Usuario_Id == usuario_id && a.Porcentagem != 100 select a).Count().ToString();
+            string atrasadas = (from a in db.Tarefas where a.DataFinal < DateTime.Now && a.Usuario_Id == usuario_id && a.Porcentagem != 100 select a).Count().ToString();
 
             List<string[]> data = new List<string[]>();
             data.Add(new[] { "", "Value" });
-            data.Add(new[] { "Finalizada", entrega });
+            data.Add(new[] { "Entregues", entrega });
             data.Add(new[] { "Atrasadas", atrasadas });
-            data.Add(new[] { "Tarefas", totalTarefas });
+            data.Add(new[] { "Em ativas", ativas });
+
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public PartialViewResult GridProjeto()
-        {
-            int gerente_id = Convert.ToInt32(Session["-USUARIO"]);
-            var projetos = (from a in db.Projetos where a.Status_Id == 2 && a.Gerente_Id == gerente_id orderby a.Nome select a).ToList();
-            Projeto obj= (from a in db.Projetos where a.Status_Id == 2 && a.Gerente_Id == gerente_id select a).FirstOrDefault();
-            Session["-IDPROJETO"] = obj.Id; 
-            return PartialView("_Projetos", projetos);
-        }
+
 
         public PartialViewResult GridTarefa()
         {
-            int projeto = Convert.ToInt32(Session["-IDPROJETO"]);
-            var tarefas = (from a in db.Tarefas where a.Porcentagem != 100 && a.Projeto_Id == projeto orderby a.Nome select a).ToList();
+
+            int usuario_id = Convert.ToInt32(Session["-USUARIO"]);
+            var tarefas = (from a in db.Tarefas where a.Porcentagem != 100 && a.Usuario_Id == usuario_id orderby a.Nome select a).ToList();
             return PartialView("_Tarefas", tarefas);
         }
 
+        public PartialViewResult FormHistorico()
+        {
+
+            int usuario_id = Convert.ToInt32(Session["-USUARIO"]);
+            Historico historico = (from a in db.Historicos where a.Tarefa.Usuario_Id == usuario_id orderby a.DataLancamento select a).FirstOrDefault();
+            Tarefa tarefa = (from a in db.Tarefas where a.Porcentagem != 100 && a.Usuario_Id == usuario_id orderby a.Nome select a).FirstOrDefault();
+            historico.Tarefa = tarefa;
+            return PartialView("_FormHistorico", historico);
+        }
+
         public PartialViewResult GridHistorico()
-        {  
-            int projeto = Convert.ToInt32(Session["-IDPROJETO"]);
-            var historicos = (from a in db.Historicos where a.Tarefa.Projeto_Id == projeto orderby a.DataLancamento select a).ToList();
+        {
+            int usuario_id = Convert.ToInt32(Session["-USUARIO"]);
+
+            var historicos = (from a in db.Historicos where a.Tarefa.Usuario_Id == usuario_id orderby a.DataLancamento select a).ToList();
             return PartialView("_Historicos", historicos);
         }
 
-        [HttpPost]
-        public ActionResult Create(Historico historico)
+
+        public ActionResult AddTarefa()
         {
+            ViewBag.Tarefa_Id = new SelectList(db.Tarefas, "Id", "Nome");
+            ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome");
+            
+            return View();
+        }
+
+        //
+        // POST: /Historico/Create
+
+        [HttpPost]
+        public ActionResult AddTarefa(Historico historico)
+        {
+           int usuario_id = (int)Session["-USUARIO"];
+
+
             if (ModelState.IsValid)
             {
-
-               
-                historico.Usuario_Id = (int)Session["-USUARIO"];
+                //historico.Tarefa_Id = 
+                historico.Usuario_Id = usuario_id;
                 db.Historicos.Add(historico);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("_Historicos", historico);
             }
 
             ViewBag.Tarefa_Id = new SelectList(db.Tarefas, "Id", "Nome", historico.Tarefa_Id);
             ViewBag.Usuario_Id = new SelectList(db.Usuarios, "Id", "Nome", historico.Usuario_Id);
-            return View(historico);
+            return View();
         }
+
     }
 }

@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\DashbordController.cs" />
+    <Compile Include="Controllers\DashuserController.cs" />
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\HistoricoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -314,6 +315,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\add.png" />
     <Content Include="Images\bt_editar.png" />
     <Content Include="Images\bt_excluir.png" />
     <Content Include="Images\bt_visualizar.png" />
@@ -456,10 +458,13 @@
     <Content Include="Views\Tarefa\Index.cshtml" />
     <Content Include="Views\Tarefa\Recurso.cshtml" />
     <Content Include="Views\UserDash\_Historicos.cshtml" />
-    <Content Include="Views\UserDash\_Projetos.cshtml" />
     <Content Include="Views\UserDash\_Tarefas.cshtml" />
     <Content Include="Views\UserDash\Index.cshtml" />
-    <Content Include="Views\UserDash\_CreateHistorico.cshtml" />
+    <Content Include="Views\UserDash\_FormHistorico.cshtml" />
+    <Content Include="Views\UserDash\AddTarefa.cshtml" />
+    <Content Include="Views\Dashuser\Create.cshtml" />
+    <Content Include="Views\Dashuser\_Historicos.cshtml" />
+    <Content Include="Views\Dashuser\_Tarefas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

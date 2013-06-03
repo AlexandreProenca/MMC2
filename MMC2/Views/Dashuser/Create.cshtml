@@ -1,9 +1,8 @@
-﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    
-}
+﻿@model MMC2.Models.Historico
 
+@{
+    ViewBag.Title = "Create";
+}
 @section Scripts {
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -12,59 +11,51 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-           
-           
+
+
+            $("#lnkVoltar").button({ icons: { primary: "ui-icon-arrowreturnthick-1-w" } });
+            $("#btnSalvar").button({
+                icons: {
+                    primary: "ui-icon-disk"
+                },
+                text: false
+            })
+
             atualizarTarefa();
             atualizarHistorico();
-            getHistorico();
-            
-
+           
         });
-        
-       
-        google.load("visualization", "1", { packages: ["corechart"] });      
+
+
+        google.load("visualization", "1", { packages: ["corechart"] });
         google.setOnLoadCallback(drawChart);
-      
+
 
         function setAguarde(dv) {
             $("#" + dv).html("<img src='/images/ajaxP.gif'/ alt=''>&nbsp;Aguarde...");
         }
 
         function atualizarHistorico() {
-                    
-                $.ajax(
-                {
-                    type: 'GET',
-                    url: '/UserDash/GridHistorico/',
-                    dataType: 'html',
-                    cache: false,
-                   async: true,
-                   success: function (data) {
-                       $('#gridHistoricos').html(data);
-                    }
-                });
-        }
-        function getHistorico() {
 
             $.ajax(
             {
                 type: 'GET',
-                url: '/UserDash/FormHistorico/',
+                url: '/Dashuser/GridHistorico/',
                 dataType: 'html',
                 cache: false,
                 async: true,
                 success: function (data) {
-                    $('#formHistoricos').html(data);
+                    $('#gridHistoricos').html(data);
                 }
             });
         }
-
+        
         function atualizarTarefa() {
 
             $.ajax(
             {
                 type: 'GET',
-                url: '/UserDash/GridTarefa/',
+                url: '/Dashuser/GridTarefa/',
                 dataType: 'html',
                 cache: false,
                 async: true,
@@ -74,34 +65,21 @@
             });
         }
 
-        function FormHistorico() {
-
-            $.ajax(
-            {
-                type: 'GET',
-                url: '/UserDash/FormHistorico/',
-                dataType: 'html',
-                cache: false,
-                async: true,
-                success: function (data) {
-                    $('#formHistoricos').html(data);
-                }
-            });
-        }
+      
 
         function drawChart() {
 
-                $.ajax({
+            $.ajax({
                 type: "GET",
-                url: "/Dashbord/GetAreaChartData/",
+                url: "/Dashuser/GetAreaChartData/",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    
+
                     var tdata = new google.visualization.DataTable();
                     var rows = data.length;
                     var cols = data[0].length;
-                 
+
                     tdata.addColumn('string', data[0][0]);
                     for (var i = 0; i < cols; i++) {
                         tdata.addColumn('number', data[0][i]);
@@ -121,7 +99,7 @@
                     var options = {
                         title: '',
                         legend: { position: 'bottom' },
-                        chartArea: { height: '500',width: '500' },
+                        chartArea: { height: '500', width: '500' },
                         is3D: 'true',
                         backgroundColor: '#efeeef',
                         fontSize: '14'
@@ -131,7 +109,7 @@
                     var chart = new google.visualization.PieChart(document.getElementById('grafico_status'));
                     chart.draw(tdata, options);
                 }
-        });
+            });
         }
 
         google.load('visualization', '1', { packages: ['gauge'] });
@@ -140,7 +118,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "/UserDash/GetGauge/",
+                url: "/Dashuser/GetGauge/",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -152,7 +130,7 @@
                     tdata.addColumn('string', data[0][0]);
                     for (var i = 0; i < cols; i++) {
                         tdata.addColumn('number', data[0][i]);
-                       
+
                     }
 
                     tdata.addRows(data.length);
@@ -164,7 +142,7 @@
 
                         }
                     }
-                    
+
                     var options = {
                         width: 450, height: 200,
                         redFrom: 35, redTo: 50,
@@ -181,17 +159,63 @@
     </script>
 }
 
-<h1>Lancamentos de historicos em tarefas</h1>
+<h2>Gerenciamento de tarefas</h2>
+<div id="criar_historico">
 
-<div style="float:left; margin:0px 0px 0px 30px">
-    <h2>Entregues&nbsp;&nbsp;&nbsp;&nbsp; Atrasadas  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ativas</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <div style="border: 1px; float: left; margin: 10px">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.QtdHoras)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.QtdHoras)
+                @Html.ValidationMessageFor(model => model.QtdHoras)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DataLancamento)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DataLancamento)
+                @Html.ValidationMessageFor(model => model.DataLancamento)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Descrição)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Descrição)
+                @Html.ValidationMessageFor(model => model.Descrição)
+            </div>
+        </div>
+        <div style="border: 1px; float: left; margin: 10px">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Tarefa_Id, "Tarefas Ativas")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Tarefa_Id, new SelectList(ViewBag.Tar, "Id", "Nome"),
+                "", new { id = "Tarefa" })
+            </div>
+
+            @*  <div class="editor-label">
+            @Html.LabelFor(model => model.Usuario_Id, "Usuario Executor")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Usuario_Id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Usuario_Id)
+        </div>*@
+
+            <p>
+                <input type="submit" value="Criar histórico" id="btnSalvar" />
+            </p>
+           
+        </div>
+ 
+    }
 </div>
-
-<div id="chart_div"  style="float:left;  margin:15px; width:700px;"></div>
-
-
 
 <div id="gridTarefas" style="float:left;  margin:15px;" ></div>
 <div id="gridHistoricos" style="float:left;  margin:15px;"></div>
-<div id="formHistoricos" style="float:left;  margin:15px;" ></div>
-     
