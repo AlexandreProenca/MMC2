@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MMC2.Models.Tarefa>
+
+@{
+    ViewBag.Title = "Gerenciar Tarefas";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5, ajaxUpdateContainerId: "partial_t");
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+
+    </script>
+}
+<h2 style="color:green">Tarefas concluidas</h2>
+<div id="partial_t">
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead", 
+    footerStyle:"gridFooter",
+	rowStyle:"gridRow", 
+    alternatingRowStyle: "gridAltRow",
+    htmlAttributes: new { id = "grid-dash" },
+    columns: new [] {
+    grid.Column("Nome",header:"Nome"),
+    grid.Column("DataInicio",header:"Início",format:p=>p.DataInicio.ToShortDateString()),
+    grid.Column("DataFinal",header:"Entrega",format:p=>p.DataFinal.ToShortDateString()),
+    grid.Column("Porcentagem",header:"Porcent"),
+    grid.Column("Prioridade",header:"Prioridade"),
+    grid.Column("Projeto.Nome",header:"Projeto"),
+    grid.Column("Usuario.Nome",header:"Executor"),
+    grid.Column("TempoEstimado",header:"Tempo estimado"),
+    grid.Column("TipoSkill.Nome",header:"Habilidade"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("../Tarefa/Edit", new { id=item.Id })"><img src="~/Images/bt_editar.png" title="Editar" /></a> </text>, style:"gridBtn"),
+    grid.Column("",header:"",format:@<text> <a href="@Url.Action("../Tarefa/Details", new { id=item.Id })"><img src="~/Images/bt_visualizar.png" title="Detalhar" /></a> </text>, style:"gridBtn"),
+   
+})
+    </div>
+ 

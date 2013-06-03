@@ -16,7 +16,7 @@
             atualizarProjeto();
             atualizarTarefa();
             atualizarHistorico();
-           
+            atualizarTarefaConcuida();
             
 
         });
@@ -56,6 +56,21 @@
                 async: true,
                 success: function (data) {
                     $('#gridTarefas').html(data);
+                }
+            });
+        }
+
+        function atualizarTarefaConcuida() {
+
+            $.ajax(
+            {
+                type: 'GET',
+                url: '/Dashbord/GridTarefaConcuida/',
+                dataType: 'html',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#gridTarefasConcuidas').html(data);
                 }
             });
         }
@@ -180,5 +195,7 @@
 <div id="gridProjetos" style="float:left;  margin:15px;"></div>
 <div id="gridHistoricos" style="float:left;  margin:15px;"></div>
 <div id="gridTarefas" style="float:left;  margin:15px;" ></div>
+<div id="gridTarefasConcuidas" style="float:left;  margin:15px;" ></div>
+
 
      

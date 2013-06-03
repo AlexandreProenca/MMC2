@@ -467,6 +467,7 @@
     <Content Include="Views\Dashuser\Create.cshtml" />
     <Content Include="Views\Dashuser\_Historicos.cshtml" />
     <Content Include="Views\Dashuser\_Tarefas.cshtml" />
+    <Content Include="Views\Dashbord\_TarefasConcuidas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

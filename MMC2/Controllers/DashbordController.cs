@@ -78,8 +78,15 @@ namespace MMC2.Controllers
         public PartialViewResult GridTarefa()
         {
             int projeto = Convert.ToInt32(Session["-IDPROJETO"]);
-            var tarefas = (from a in db.Tarefas where a.Porcentagem != 100 && a.Projeto_Id == projeto orderby a.Nome select a).ToList();
+            var tarefas = (from a in db.Tarefas where a.Status_Id == 5 && a.Projeto_Id == projeto orderby a.Nome select a).ToList();
             return PartialView("_Tarefas", tarefas);
+        }
+
+        public PartialViewResult GridTarefaConcuida()
+        {
+            int projeto = Convert.ToInt32(Session["-IDPROJETO"]);
+            var tarefas = (from a in db.Tarefas where a.Porcentagem == 100 && a.Projeto_Id == projeto orderby a.Nome select a).ToList();
+            return PartialView("_TarefasConcuidas", tarefas);
         }
 
         public PartialViewResult GridHistorico()
